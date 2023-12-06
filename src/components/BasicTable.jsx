@@ -98,8 +98,8 @@ function BasicTable() {
                   <span
                     className={`p-1.5  ${
                       row.status === "Pending"
-                        ? "text-goldenrod bg-pending"
-                        : "text-green-500 bg-approved"
+                        ? "text-yellow-600 bg-yellow-100"
+                        : "text-green-600 bg-green-100"
                     }`}
                   >
                     {row.status}

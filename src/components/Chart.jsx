@@ -17,13 +17,13 @@ const data = [
   { name: "June", Total: 1700 },
 ];
 
-function Chart() {
+function Chart({ aspect, title }) {
   return (
     <div className="flex-4 shadow-3xl p-[10px]">
-      <div className="font-bold text-sm uppercase text-gray-600 mb-4">
-        Last 6 Months (Revenue)
+      <div className="font-bold text-sm uppercase text-gray-400 mb-4">
+        {title}
       </div>
-      <ResponsiveContainer width="100%" aspect={2 / 1}>
+      <ResponsiveContainer width="100%" aspect={aspect}>
         <AreaChart
           width={500}
           height={400}

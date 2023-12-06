@@ -8,7 +8,10 @@ import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 
 function Navbar() {
   return (
-    <div className="h-[50px] flex items-center text-sm border-b">
+    <div
+      className="h-[50px] flex items-center text-sm border-b
+    "
+    >
       <div className="w-full p-[20px] flex items-center justify-between">
         <div className="flex items-center p-[3px]">
           <input

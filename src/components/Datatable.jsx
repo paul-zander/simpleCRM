@@ -10,6 +10,8 @@ function Datatable() {
     setData(data.filter((item) => item.id !== id));
   }
 
+  console.log(data);
+
   const actionColumn = [
     {
       field: "action",
@@ -18,11 +20,13 @@ function Datatable() {
       renderCell: (params) => {
         return (
           <div className="flex items-center gap-[15px]">
-            <Link to="/users/test" style={{ textDecoration: "none" }}>
+            {/* view btn */}
+            <Link to={`/users/${params.id}`} style={{ textDecoration: "none" }}>
               <div className="py-[2px] px-[5px] rounded-sm text-blue-900 border border-dotted border-blue-900 cursor-pointer">
                 View
               </div>
             </Link>
+            {/* delete btn */}
             <div
               className="py-[2px] px-[5px] rounded-sm text-red-900 border border-dotted border-red-900 cursor-pointer"
               onClick={() => handleDelete(params.row.id)}

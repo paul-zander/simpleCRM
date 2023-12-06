@@ -13,6 +13,15 @@ export default {
         "3xl":
           "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;rgba(149, 157, 165, 0.2) 0px 8px 24px;",
       },
+      colors: {
+        pending: "rgba(189, 189, 3, 0.103)",
+        approved: "rgba(0, 128, 0, 0.151)",
+        goldenrod: "#DAA520",
+        crimson: "#DC143C",
+        active: "rgba(0, 128, 0, 0.05)",
+        passive: "rgba(255, 0, 0, 0.05)",
+        viewBtn: "rgba(0, 0, 139, 0.596)",
+      },
     },
   },
   plugins: [],

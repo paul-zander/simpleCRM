@@ -21,7 +21,10 @@ function Home() {
           <Featured />
           <Chart />
         </div>
-        <div>
+        <div className="shadow-3xl p-[20px] m-[20px]">
+          <h2 className="font-bold text-sm uppercase text-gray-600 mb-3.5">
+            Latest Transactions
+          </h2>
           <Table />
         </div>
       </div>

@@ -61,50 +61,56 @@ function BasicTable() {
   ];
 
   return (
-    <>
-      <h2 className="font-bold text-sm uppercase text-gray-600">
-        Latest Transactions
-      </h2>
-      <div className="flex-2 shadow-3xl p-[10px]">
-        <TableContainer component={Paper}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Tracking ID</TableCell>
-                <TableCell>Product</TableCell>
-                <TableCell>Customer</TableCell>
-                <TableCell>Date</TableCell>
-                <TableCell>Amount</TableCell>
-                <TableCell>Payment Method</TableCell>
-                <TableCell>Status</TableCell>
+    <div className="flex-2 p-[10px]">
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Tracking ID</TableCell>
+              <TableCell>Product</TableCell>
+              <TableCell>Customer</TableCell>
+              <TableCell>Date</TableCell>
+              <TableCell>Amount</TableCell>
+              <TableCell>Payment Method</TableCell>
+              <TableCell>Status</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell>{row.id}</TableCell>
+                <TableCell>
+                  <div className="flex items-center">
+                    <img
+                      src={row.img}
+                      alt=""
+                      className="h-8 w-8 rounded-full mr-2.5 object-cover"
+                    />
+                    {row.product}
+                  </div>
+                </TableCell>
+                <TableCell>{row.customer}</TableCell>
+                <TableCell>{row.date}</TableCell>
+                <TableCell>{row.amount}</TableCell>
+                <TableCell>{row.method}</TableCell>
+                <TableCell>
+                  {/* change color depending on status */}
+                  <span
+                    className={`p-1.5  ${
+                      row.status === "Pending"
+                        ? "text-goldenrod bg-pending"
+                        : "text-green-500 bg-approved"
+                    }`}
+                  >
+                    {row.status}
+                  </span>
+                </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.id}</TableCell>
-                  <TableCell>
-                    <div className="flex items-center">
-                      <img
-                        src={row.img}
-                        alt=""
-                        className="h-8 w-8 rounded-full mr-2.5 object-cover"
-                      />
-                      {row.product}
-                    </div>
-                  </TableCell>
-                  <TableCell>{row.customer}</TableCell>
-                  <TableCell>{row.date}</TableCell>
-                  <TableCell>{row.amount}</TableCell>
-                  <TableCell>{row.method}</TableCell>
-                  <TableCell>{row.status}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div>
-    </>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 }
 

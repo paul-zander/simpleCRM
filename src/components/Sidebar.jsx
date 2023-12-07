@@ -8,33 +8,44 @@ import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import { Link } from "react-router-dom";
 
 function Sidebar() {
   return (
     <div className="flex-1  min-h-screen bg-white shadow-3xl">
       <div className="h-[50px] flex items-center justify-center">
-        <span className="text-lg font-bold text-purple-800">SimpleCRM</span>
+        <Link to="/">
+          <span className="text-lg font-bold text-purple-800">SimpleCRM</span>
+        </Link>
       </div>
       <div className="pl-[10px]">
         <ul className="list-none">
           <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">MAIN</p>
-          <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-            <SpaceDashboardOutlinedIcon fontSize="small" />
-            <span className="text-gray-700 ml-2">Dashboard</span>
-          </li>
+          <Link to="/">
+            <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
+              <SpaceDashboardOutlinedIcon fontSize="small" />
+              <span className="text-gray-700 ml-2">Dashboard</span>
+            </li>
+          </Link>
           <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">LISTS</p>
-          <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-            <Person2OutlinedIcon fontSize="small" />
-            <span className="text-gray-700 ml-2">Users</span>
-          </li>
-          <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-            <Inventory2OutlinedIcon fontSize="small" />
-            <span className="text-gray-700 ml-2">Products</span>
-          </li>
-          <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-            <CreditCardOutlinedIcon fontSize="small" />
-            <span className="text-gray-700 ml-2">Orders</span>
-          </li>
+          <Link to="/users">
+            <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
+              <Person2OutlinedIcon fontSize="small" />
+              <span className="text-gray-700 ml-2">Users</span>
+            </li>
+          </Link>
+          <Link to="/products">
+            <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
+              <Inventory2OutlinedIcon fontSize="small" />
+              <span className="text-gray-700 ml-2">Products</span>
+            </li>
+          </Link>
+          <Link to="/orders">
+            <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
+              <CreditCardOutlinedIcon fontSize="small" />
+              <span className="text-gray-700 ml-2">Orders</span>
+            </li>
+          </Link>
           <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
             <LocalShippingOutlinedIcon fontSize="small" />
             <span className="text-gray-700 ml-2">Delivery</span>

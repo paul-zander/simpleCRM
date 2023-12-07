@@ -40,11 +40,11 @@ function Datatable() {
   ];
   return (
     <div className="h-[600px] p-[20px]">
-      <div className="w-full text-sm text-gray-600 font-bold mb-[10px] flex items-center justify-between">
+      <div className="w-full text-sm text-gray-600 font-bold mb-6 flex items-center justify-between">
         ADD NEW USER
         <Link
           to="/users/new"
-          className="text-green-500 text-base font-normal border border-green-500 p-[5px] rounded-md cursor-pointer"
+          className="text-green-500 hover:text-green-700 text-base font-normal border border-green-500 hover:border-green-700 p-[5px] rounded-md cursor-pointer"
         >
           Add New
         </Link>

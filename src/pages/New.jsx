@@ -1,11 +1,44 @@
 import { useState } from "react";
 import Sidebar from "../components/Sidebar.jsx";
 import Navbar from "../components/Navbar.jsx";
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
+import UploadIcon from "@mui/icons-material/Upload";
+import {
+  collection,
+  addDoc,
+  setDoc,
+  doc,
+  serverTimestamp,
+} from "firebase/firestore";
+import { db, auth, storage } from "../firebase.jsx";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 function New({ inputs, title }) {
   const [file, setFile] = useState("");
+  const [data, setData] = useState({});
   console.log(file);
+
+  function handleInput(e) {
+    setData({ ...data, [e.target.id]: e.target.value });
+  }
+
+  async function addData(e) {
+    e.preventDefault();
+    try {
+      const res = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
+      await setDoc(doc(db, "users", res.user.uid), {
+        ...data,
+        timeStamp: serverTimestamp(),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="w-full flex">
       <Sidebar />
@@ -31,11 +64,16 @@ function New({ inputs, title }) {
           </div>
           {/* right */}
           <div className="flex-2">
-            <form className="flex flex-wrap gap-[30px] justify-around">
+            <form
+              onSubmit={addData}
+              className="flex flex-wrap gap-[30px] justify-around"
+            >
               <div className="w-2/5">
-                <label htmlFor="file">
+                <label className="flex items-center" htmlFor="file">
                   Image:
-                  <DriveFolderUploadOutlinedIcon className="cursor-pointer ml-3" />
+                  <div className="cursor-pointer ml-3 rounded-full border border-gray-600 h-8 w-8 flex items-center justify-center">
+                    <UploadIcon />
+                  </div>
                 </label>
                 <input
                   type="file"
@@ -51,13 +89,18 @@ function New({ inputs, title }) {
                     {input.label}
                   </label>
                   <input
-                    className="w-full p-[5px] border-b"
+                    className="w-full p-[5px] border-2 mt-2 outline-none"
                     type={input.type}
                     placeholder={input.placeholder}
+                    id={input.id}
+                    onChange={handleInput}
                   />
                 </div>
               ))}
-              <button className="w-[150px] p-[10px] border-none bg-[#008080] hover:bg-[#63a5a5] text-white text-bold cursor-pointer mt-[10px]">
+              <button
+                className="w-[150px] p-[10px] border-none bg-[#008080] hover:bg-[#63a5a5] text-white text-bold cursor-pointer mt-[10px]"
+                type="submit"
+              >
                 Send
               </button>
             </form>

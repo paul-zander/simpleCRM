@@ -1,41 +1,41 @@
 export const userInputs = [
   {
-    id: 1,
+    id: "username",
     label: "Username",
     type: "text",
     placeholder: "max_mustermann",
   },
   {
-    id: 2,
+    id: "name",
     label: "Name and surname",
     type: "text",
     placeholder: "Max Mustermann",
   },
   {
-    id: 3,
+    id: "email",
     label: "Email",
     type: "mail",
     placeholder: "max_mustermann@gmail.com",
   },
   {
-    id: 4,
+    id: "phone",
     label: "Phone",
     type: "text",
     placeholder: "0152 28817386",
   },
   {
-    id: 5,
+    id: "password",
     label: "Password",
     type: "password",
   },
   {
-    id: 6,
+    id: "adress",
     label: "Address",
     type: "text",
     placeholder: "Max-Mustermann-Straße, 10115 Berlin",
   },
   {
-    id: 7,
+    id: "country",
     label: "Country",
     type: "text",
     placeholder: "Germany",

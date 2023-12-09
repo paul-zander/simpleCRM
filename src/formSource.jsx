@@ -17,6 +17,7 @@ export const userInputs = [
     type: "mail",
     placeholder: "max_mustermann@gmail.com",
   },
+  { id: "age", label: "Age", type: "number", placeholder: "Age", min: "18" },
   {
     id: "phone",
     label: "Phone",

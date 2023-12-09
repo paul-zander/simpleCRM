@@ -1,10 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { userRows, userColumns } from "../datatablesource.jsx";
 import { Link } from "react-router-dom";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firebase.jsx";
 
 function Datatable() {
   const [data, setData] = useState(userRows);
+
+  useEffect(() => {
+    async function getData() {
+      const querySnapshot = await getDocs(collection(db, "users"));
+      querySnapshot.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+        // const user = doc.data();
+        // setData((prev) => [...prev, user]);
+      });
+    }
+    getData();
+  }, []);
 
   function handleDelete(id) {
     setData(data.filter((item) => item.id !== id));

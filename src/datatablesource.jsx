@@ -24,7 +24,7 @@ export const userColumns = [
   {
     field: "user",
     headerName: "User",
-    width: 230,
+    width: 200,
     renderCell: (params) => {
       return (
         <div className="flex items-center">
@@ -41,7 +41,7 @@ export const userColumns = [
   {
     field: "email",
     headerName: "Email",
-    width: 230,
+    width: 200,
   },
 
   {
@@ -50,21 +50,36 @@ export const userColumns = [
     width: 100,
   },
   {
-    field: "status",
-    headerName: "Status",
-    width: 160,
-    renderCell: (params) => {
-      return (
-        <div
-          className={`p-[5px] rounded ${getStatusColorClasses(
-            params.row.status
-          )}`}
-        >
-          {params.row.status}
-        </div>
-      );
-    },
+    field: "phone",
+    headerName: "Phone",
+    width: 100,
   },
+  {
+    field: "adress",
+    headerName: "Adress",
+    width: 150,
+  },
+  {
+    field: "country",
+    headerName: "Country",
+    width: 100,
+  },
+  // {
+  //   field: "status",
+  //   headerName: "Status",
+  //   width: 160,
+  //   renderCell: (params) => {
+  //     return (
+  //       <div
+  //         className={`p-[5px] rounded ${getStatusColorClasses(
+  //           params.row.status
+  //         )}`}
+  //       >
+  //         {params.row.status}
+  //       </div>
+  //     );
+  //   },
+  // },
 ];
 
 //temporary data

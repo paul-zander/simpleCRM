@@ -1,25 +1,26 @@
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { userRows, userColumns } from "../datatablesource.jsx";
+// import { userRows, userColumns } from "../datatablesource.jsx";
 import { Link } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase.jsx";
 
-function Datatable() {
-  const [data, setData] = useState(userRows);
+function Datatable({ columns, category }) {
+  // const [data, setData] = useState(userRows);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     async function getData() {
-      const querySnapshot = await getDocs(collection(db, "users"));
+      const querySnapshot = await getDocs(collection(db, `${category}`));
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
-        // const user = doc.data();
-        // setData((prev) => [...prev, user]);
+        const data = doc.data();
+        setData((prev) => [...prev, data]);
       });
     }
     getData();
-  }, []);
+  }, [category]);
 
   function handleDelete(id) {
     setData(data.filter((item) => item.id !== id));
@@ -36,7 +37,10 @@ function Datatable() {
         return (
           <div className="flex items-center gap-[15px]">
             {/* view btn */}
-            <Link to={`/users/${params.id}`} style={{ textDecoration: "none" }}>
+            <Link
+              to={`/${category}/${params.id}`}
+              style={{ textDecoration: "none" }}
+            >
               <div className="py-[2px] px-[5px] rounded-sm text-blue-900 border border-dotted border-blue-900 cursor-pointer">
                 View
               </div>
@@ -55,11 +59,11 @@ function Datatable() {
   ];
   return (
     <div className="h-[600px] p-[20px]">
-      <div className="w-full text-sm text-gray-600 font-bold mb-6 flex items-center justify-between">
-        ADD NEW USER
+      <div className="w-full text-sm text-gray-600 font-bold mb-6 flex items-center gap-5">
+        {`ADD NEW ${category === "users" ? "USER" : "PRODUCT"}`}
         <Link
-          to="/users/new"
-          className="text-green-500 hover:text-green-700 text-base font-normal border border-green-500 hover:border-green-700 p-[5px] rounded-md cursor-pointer"
+          to={`/${category}/new`}
+          className="text-white text-base font-normal bg-green-600 hover:bg-green-500  p-[5px] rounded-md cursor-pointer"
         >
           Add New
         </Link>
@@ -67,7 +71,7 @@ function Datatable() {
       <DataGrid
         className="datagrid"
         rows={data}
-        columns={userColumns.concat(actionColumn)}
+        columns={columns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
         checkboxSelection

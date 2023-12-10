@@ -12,6 +12,7 @@ import New from "./pages/New.jsx";
 import { userInputs, productInputs } from "./formSource.jsx";
 import { AuthContext } from "./contexts/AuthContext.jsx";
 import { useContext } from "react";
+import { userColumns, productColumns } from "./datatablesource.jsx";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -38,7 +39,7 @@ function App() {
               index
               element={
                 <RequireAuth>
-                  <List />
+                  <List columns={userColumns} category="users" />
                 </RequireAuth>
               }
             />
@@ -64,7 +65,7 @@ function App() {
               index
               element={
                 <RequireAuth>
-                  <List />
+                  <List columns={productColumns} category="products" />
                 </RequireAuth>
               }
             />

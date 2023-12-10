@@ -52,7 +52,7 @@ export const userColumns = [
   {
     field: "phone",
     headerName: "Phone",
-    width: 100,
+    width: 150,
   },
   {
     field: "adress",
@@ -64,22 +64,37 @@ export const userColumns = [
     headerName: "Country",
     width: 100,
   },
-  // {
-  //   field: "status",
-  //   headerName: "Status",
-  //   width: 160,
-  //   renderCell: (params) => {
-  //     return (
-  //       <div
-  //         className={`p-[5px] rounded ${getStatusColorClasses(
-  //           params.row.status
-  //         )}`}
-  //       >
-  //         {params.row.status}
-  //       </div>
-  //     );
-  //   },
-  // },
+];
+
+export const productColumns = [
+  { field: "id", headerName: "Tracking ID", width: 150 },
+  {
+    field: "product",
+    headerName: "Product",
+    width: 200,
+    renderCell: (params) => {
+      return (
+        <div className="flex items-center">
+          <img
+            className="w-8 h-8 rounded-full object-cover mr-[20px]"
+            src={params.row.img}
+            alt="avatar"
+          />
+          {params.row.product}
+        </div>
+      );
+    },
+  },
+  {
+    field: "price",
+    headerName: "Price",
+    width: 150,
+  },
+  {
+    field: "stock",
+    headerName: "In Stock",
+    width: 150,
+  },
 ];
 
 //temporary data

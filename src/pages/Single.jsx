@@ -2,8 +2,40 @@ import Sidebar from "../components/Sidebar.jsx";
 import Navbar from "../components/Navbar.jsx";
 import Chart from "../components/Chart.jsx";
 import BasicTable from "../components/BasicTable.jsx";
+import { useParams } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore";
+
+import { db } from "../firebase.jsx";
+import { useState, useEffect } from "react";
 
 function SinglePage() {
+  const { userId, productId } = useParams();
+  console.log(userId, productId);
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function getData() {
+      const docRef = doc(
+        db,
+        userId ? "users" : "products",
+        userId ? userId : productId
+      );
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        setData(docSnap.data());
+        console.log(productId);
+      } else {
+        // docSnap.data() will be undefined in this case
+        console.log("No such document!");
+        console.log(productId);
+      }
+    }
+    getData();
+  }, [userId, productId]);
+
   return (
     <div className="flex w-full">
       <Sidebar />
@@ -26,7 +58,9 @@ function SinglePage() {
                 alt=""
               />
               <div>
-                <h2 className="text-2xl mb-2">Jane Doe</h2>
+                <h2 className="text-2xl mb-2">{`${
+                  userId ? data.name : data.product
+                }`}</h2>
                 <div className="mb-[10px] text-gray-600 text-sm">
                   <span className="font-bold">Email: </span>
                   <span>janedoe@gmail.com</span>

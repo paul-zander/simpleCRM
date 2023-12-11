@@ -79,10 +79,12 @@ function Sidebar() {
             <AccountBoxOutlinedIcon fontSize="small" />
             <span className="text-gray-700 ml-2">Profile</span>
           </li>
-          <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-            <LogoutOutlinedIcon fontSize="small" />
-            <span className="text-gray-700 ml-2">Logout</span>
-          </li>
+          <Link to="/login">
+            <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
+              <LogoutOutlinedIcon fontSize="small" />
+              <span className="text-gray-700 ml-2">Logout</span>
+            </li>
+          </Link>
         </ul>
       </div>
       <div className="flex items-center p-2 cursor-pointer hover:bg-purple-100 mt-8">

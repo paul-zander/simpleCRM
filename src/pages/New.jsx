@@ -18,6 +18,7 @@ import { Toaster } from "react-hot-toast";
 function New({ inputs, title }) {
   const [file, setFile] = useState("");
   const [data, setData] = useState({});
+  const [imageSelected, setImageSelected] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(null);
   // let isUploading = false;
 
@@ -105,10 +106,22 @@ function New({ inputs, title }) {
     setData({ ...data, [e.target.id]: e.target.value });
   }
 
-  console.log(title);
+  console.log("render happended");
+
+  function checkIfImageUploaded() {
+    if (file === "") {
+      toast.error("Please upload an image.");
+      return true;
+    }
+    return false;
+  }
 
   async function addData(e) {
     e.preventDefault();
+    if (checkIfImageUploaded()) {
+      return;
+    }
+
     console.log(title);
     if (title === "Add New User") {
       try {
@@ -225,6 +238,7 @@ function New({ inputs, title }) {
                     id={input.id}
                     onChange={handleInput}
                     value={data[input.id] || ""}
+                    required
                   />
                 </div>
               ))}

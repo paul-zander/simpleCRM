@@ -9,15 +9,23 @@ function Datatable({ columns, category }) {
   // const [data, setData] = useState(userRows);
   const [data, setData] = useState([]);
 
+  // useEffect(() => {
+  //   async function getData() {
+  //     const querySnapshot = await getDocs(collection(db, `${category}`));
+  //     querySnapshot.forEach((doc) => {
+  //       // doc.data() is never undefined for query doc snapshots
+  //       console.log(doc.id, " => ", doc.data());
+  //       const data = doc.data();
+  //       setData((prev) => [...prev, data]);
+  //     });
+  //   }
+  //   getData();
+  // }, [category]);
+
   useEffect(() => {
     async function getData() {
       const querySnapshot = await getDocs(collection(db, `${category}`));
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
-        const data = doc.data();
-        setData((prev) => [...prev, data]);
-      });
+      setData(querySnapshot.docs.map((doc) => doc.data()));
     }
     getData();
   }, [category]);

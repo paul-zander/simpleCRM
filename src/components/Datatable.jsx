@@ -60,6 +60,11 @@ function Datatable({ columns, category }) {
             >
               Delete
             </div>
+            <Link to={`/${category}/edit/${params.id}`}>
+              <div className="py-[2px] px-[5px] rounded-sm text-green-900 border border-dotted border-green-900 cursor-pointer">
+                Edit
+              </div>
+            </Link>
           </div>
         );
       },

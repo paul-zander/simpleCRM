@@ -9,6 +9,7 @@ import Login from "./pages/Login.jsx";
 import List from "./pages/List.jsx";
 import Single from "./pages/Single.jsx";
 import New from "./pages/New.jsx";
+import Edit from "./pages/Edit.jsx";
 import { userInputs, productInputs } from "./formSource.jsx";
 import { AuthContext } from "./contexts/AuthContext.jsx";
 import { useContext } from "react";
@@ -48,6 +49,22 @@ function App() {
               element={
                 <RequireAuth>
                   <Single />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="edit"
+              element={
+                <RequireAuth>
+                  <Edit />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="edit/:userId"
+              element={
+                <RequireAuth>
+                  <Edit />
                 </RequireAuth>
               }
             />

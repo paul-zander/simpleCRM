@@ -22,6 +22,8 @@ function New({ inputs, title }) {
   const [uploadProgress, setUploadProgress] = useState(null);
   // let isUploading = false;
 
+  console.log(data);
+
   useEffect(() => {
     function uploadFile() {
       const uniqueName = new Date().getTime() + file.name;
@@ -191,7 +193,7 @@ function New({ inputs, title }) {
           <h1 className="text-gray-400 text-md">{title}</h1>
         </div>
         {/* bottom */}
-        <div className="shadow-3xl p-6 m-[20px] flex">
+        <div className="shadow-3xl p-6 m-[20px] flex flex-col">
           {/* left */}
           <div className="flex justify-center flex-1 items-center">
             <img
@@ -208,7 +210,7 @@ function New({ inputs, title }) {
           <div className="flex-2">
             <form
               onSubmit={addData}
-              className="flex flex-wrap gap-[30px] justify-around"
+              className="flex flex-col gap-6 items-center mt-12 justify-around"
             >
               <div className="w-2/5">
                 <label className="flex items-center" htmlFor="file">
@@ -230,16 +232,31 @@ function New({ inputs, title }) {
                   <label className="flex items-center gap-[10px]">
                     {input.label}
                   </label>
-                  <input
-                    className="w-full p-[5px] border-2 mt-2 outline-none"
-                    type={input.type}
-                    min={input.min}
-                    placeholder={input.placeholder}
-                    id={input.id}
-                    onChange={handleInput}
-                    value={data[input.id] || ""}
-                    required
-                  />
+                  {input.type === "textarea" ? (
+                    <textarea
+                      className={`w-full p-[5px] border-2 mt-2 outline-none resize-none ${
+                        input.id === "description" ? "h-[150px]" : ""
+                      }`}
+                      type={input.type}
+                      min={input.min}
+                      placeholder={input.placeholder}
+                      id={input.id}
+                      onChange={handleInput}
+                      value={data[input.id] || ""}
+                      required
+                    />
+                  ) : (
+                    <input
+                      className="w-full p-[5px] border-2 mt-2 outline-none resize-none"
+                      type={input.type}
+                      min={input.min}
+                      placeholder={input.placeholder}
+                      id={input.id}
+                      onChange={handleInput}
+                      value={data[input.id] || ""}
+                      required
+                    />
+                  )}
                 </div>
               ))}
               <button

@@ -48,7 +48,7 @@ export const productInputs = [
     id: "product",
     label: "Product",
     type: "text",
-    placeholder: "Apple Macbook Pro",
+    placeholder: "Small-scale App Development",
   },
   {
     id: "price",
@@ -57,9 +57,10 @@ export const productInputs = [
     placeholder: "Price",
   },
   {
-    id: "stock",
-    label: "Stock",
-    type: "number",
-    placeholder: "100",
+    id: "description",
+    label: "Description",
+    type: "textarea",
+    placeholder:
+      "Development of simple, custom mobile applications for personal or business use. Ideal for individuals with specific requirements for a mobile app.",
   },
 ];

@@ -9,8 +9,22 @@ import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import { Link } from "react-router-dom";
+import { getAuth, signOut } from "firebase/auth";
 
 function Sidebar() {
+  const auth = getAuth();
+  function logOut() {
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        console.log("Sign-out successful.");
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+        console.log("An error happened.");
+      });
+  }
   return (
     <div className="flex-1  min-h-screen bg-white shadow-3xl">
       <div className="h-[50px] flex items-center justify-center">
@@ -79,7 +93,7 @@ function Sidebar() {
             <AccountBoxOutlinedIcon fontSize="small" />
             <span className="text-gray-700 ml-2">Profile</span>
           </li>
-          <Link to="/login">
+          <Link to="/login" onClick={logOut}>
             <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
               <LogoutOutlinedIcon fontSize="small" />
               <span className="text-gray-700 ml-2">Logout</span>

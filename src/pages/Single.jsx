@@ -2,7 +2,7 @@ import Sidebar from "../components/Sidebar.jsx";
 import Navbar from "../components/Navbar.jsx";
 import Chart from "../components/Chart.jsx";
 import BasicTable from "../components/BasicTable.jsx";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 
 import { db } from "../firebase.jsx";
@@ -47,9 +47,13 @@ function SinglePage() {
         <div className="flex p-[20px] gap-[20px]">
           {/* information card */}
           <div className="flex-1 shadow-3xl p-[20px] relative">
-            <div className="absolute top-0 right-0 p-2 text-sm text-purple-600 bg-purple-100 cursor-pointer rounded-bl-md">
-              Edit
-            </div>
+            <Link
+              to={userId ? `/users/edit/${userId}` : `/users/edit/${productId}`}
+            >
+              <div className="absolute top-0 right-0 p-2 text-sm text-purple-600 bg-purple-100 cursor-pointer rounded-bl-md">
+                Edit
+              </div>
+            </Link>
             <h2 className="mb-8 font-bold text-sm uppercase text-gray-400">
               Information
             </h2>

@@ -21,8 +21,8 @@ function SingleProduct({ data }) {
           <span>{data.price} €</span>
         </div>
         <div className="mb-[10px] text-gray-600 text-sm">
-          <span className="font-bold">Stock: </span>
-          <span>{data.stock}</span>
+          <span className="font-bold">Description: </span>
+          <span>{data.description}</span>
         </div>{" "}
       </div>
     </div>

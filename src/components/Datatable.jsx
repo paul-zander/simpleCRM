@@ -22,6 +22,8 @@ function Datatable({ columns, category }) {
   //   getData();
   // }, [category]);
 
+  console.log(data);
+
   useEffect(() => {
     async function getData() {
       const querySnapshot = await getDocs(collection(db, `${category}`));
@@ -53,6 +55,12 @@ function Datatable({ columns, category }) {
                 View
               </div>
             </Link>
+            {/* edit btn */}
+            <Link to={`/${category}/edit/${params.id}`}>
+              <div className="py-[2px] px-[5px] rounded-sm text-green-900 border border-dotted border-green-900 cursor-pointer">
+                Edit
+              </div>
+            </Link>
             {/* delete btn */}
             <div
               className="py-[2px] px-[5px] rounded-sm text-red-900 border border-dotted border-red-900 cursor-pointer"
@@ -60,11 +68,6 @@ function Datatable({ columns, category }) {
             >
               Delete
             </div>
-            <Link to={`/${category}/edit/${params.id}`}>
-              <div className="py-[2px] px-[5px] rounded-sm text-green-900 border border-dotted border-green-900 cursor-pointer">
-                Edit
-              </div>
-            </Link>
           </div>
         );
       },
@@ -87,7 +90,7 @@ function Datatable({ columns, category }) {
         columns={columns.concat(actionColumn)}
         pageSize={9}
         rowsPerPageOptions={[9]}
-        checkboxSelection
+        // checkboxSelection
       />
     </div>
   );

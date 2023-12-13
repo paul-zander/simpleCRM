@@ -1,4 +1,5 @@
 function EditProduct({ data, editData, setData }) {
+  console.log(data);
   return (
     <div className="w-full flex items-center justify-center flex-col mt-24 gap-10">
       <img
@@ -10,25 +11,25 @@ function EditProduct({ data, editData, setData }) {
         <input
           className="border-2 border-gray-200 w-[400px] p-1 outline-none"
           type="text"
-          value={data?.name || ""}
-          placeholder="Name"
-          onChange={(e) => setData({ ...data, name: e.target.value })}
+          value={data?.product || ""}
+          placeholder="Product name"
+          onChange={(e) => setData({ ...data, product: e.target.value })}
         />
         <input
           className="border-2 border-gray-200 w-[400px] p-1 outline-none"
-          type="text"
-          value={data?.username || ""}
-          placeholder="Username"
-          onChange={(e) => setData({ ...data, username: e.target.value })}
+          type="number"
+          value={data?.price || ""}
+          placeholder="Price"
+          onChange={(e) => setData({ ...data, price: e.target.value })}
         />
-        <input
-          className="border-2 border-gray-200 w-[400px] p-1 outline-none"
+        <textarea
+          className="border-2 border-gray-200 w-[400px] h-[200px] resize-none p-1 outline-none"
           type="text"
-          value={data?.adress || ""}
-          placeholder="Adress"
-          onChange={(e) => setData({ ...data, adress: e.target.value })}
+          value={data?.description || ""}
+          placeholder="Description"
+          onChange={(e) => setData({ ...data, description: e.target.value })}
         />
-        <input
+        {/* <input
           className="border-2 border-gray-200 w-[400px] p-1 outline-none"
           type="text"
           value={data?.phone || ""}
@@ -55,7 +56,7 @@ function EditProduct({ data, editData, setData }) {
           value={data?.age || ""}
           placeholder="Age"
           onChange={(e) => setData({ ...data, age: e.target.value })}
-        />
+        /> */}
         <button
           className="uppercase w-[200px] p-[10px] border-none bg-[#008080] hover:bg-[#63a5a5] text-white text-bold cursor-pointer mt-[10px]"
           type="submit"

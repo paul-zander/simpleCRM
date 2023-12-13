@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Widget from "../components/Widget";
 import BasicTable from "../components/BasicTable";
+import { generatedOrders } from "../data/transactions";
 
 function Home() {
   return (
@@ -13,8 +14,8 @@ function Home() {
         <Navbar />
         <div className="flex p-[20px] gap-[20px]">
           <Widget type="user" />
-          <Widget type="order" />
-          <Widget type="earning" />
+          <Widget type="transactions" />
+          <Widget type="products" />
           <Widget type="balance" />
         </div>
         <div className="flex px-[20px] py-[5px] gap-[20px]">
@@ -25,7 +26,7 @@ function Home() {
           <h2 className="font-bold text-sm uppercase text-gray-600 mb-3.5">
             Latest Transactions
           </h2>
-          <BasicTable />
+          <BasicTable data={generatedOrders} />
         </div>
       </div>
     </div>

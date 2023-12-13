@@ -14,6 +14,7 @@ import { userInputs, productInputs } from "./formSource.jsx";
 import { AuthContext } from "./contexts/AuthContext.jsx";
 import { useContext } from "react";
 import { userColumns, productColumns } from "./datatablesource.jsx";
+import Transactions from "./pages/Transactions.jsx";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -102,7 +103,16 @@ function App() {
                 </RequireAuth>
               }
             />
+            <Route
+              path="edit/:productId"
+              element={
+                <RequireAuth>
+                  <Edit />
+                </RequireAuth>
+              }
+            />
           </Route>
+          <Route path="transactions" element={<Transactions />} />
         </Route>
       </Routes>
     </Router>

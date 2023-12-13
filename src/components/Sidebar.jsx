@@ -4,7 +4,6 @@ import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined";
 import SignalCellularAltOutlinedIcon from "@mui/icons-material/SignalCellularAltOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
@@ -54,16 +53,12 @@ function Sidebar() {
               <span className="text-gray-700 ml-2">Products</span>
             </li>
           </Link>
-          <Link to="/orders">
+          <Link to="/transactions">
             <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
               <CreditCardOutlinedIcon fontSize="small" />
-              <span className="text-gray-700 ml-2">Orders</span>
+              <span className="text-gray-700 ml-2">Transactions</span>
             </li>
           </Link>
-          <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-            <LocalShippingOutlinedIcon fontSize="small" />
-            <span className="text-gray-700 ml-2">Delivery</span>
-          </li>
           <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">
             USEFUL
           </p>

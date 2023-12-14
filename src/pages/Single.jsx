@@ -1,17 +1,17 @@
 import Sidebar from "../components/Sidebar.jsx";
 import Navbar from "../components/Navbar.jsx";
 import Chart from "../components/Chart.jsx";
-import BasicTable from "../components/BasicTable.jsx";
+// import BasicTable from "../components/BasicTable.jsx";
 import { Link, useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase.jsx";
 import { useState, useEffect } from "react";
 import SingleUser from "./SingleUser.jsx";
 import SingleProduct from "./SingleProduct.jsx";
-import { transactionsColumns } from "../datatablesource";
-import { DataGrid } from "@mui/x-data-grid";
-import Box from "@mui/material/Box";
-import { generatedOrders } from "../data/transactions";
+// import { transactionsColumns } from "../datatablesource";
+// import { DataGrid } from "@mui/x-data-grid";
+// import Box from "@mui/material/Box";
+// import { generatedOrders } from "../data/transactions";
 
 function SinglePage() {
   const { userId, productId } = useParams();
@@ -75,7 +75,7 @@ function SinglePage() {
           <h2 className="mb-8 font-bold text-sm uppercase text-gray-400">
             Last Transactions
           </h2>
-          <BasicTable data={transactionsColumns} />
+          {/* <BasicTable data={transactionsColumns} /> */}
           {/* <Box sx={{ height: "600", width: "100%" }}>
             <DataGrid
               className="datagrid"

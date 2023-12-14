@@ -25,7 +25,7 @@ function Sidebar() {
       });
   }
   return (
-    <div className="flex-1  min-h-screen bg-white shadow-3xl">
+    <div className="flex-1 min-h-screen bg-white shadow-3xl">
       <div className="h-[50px] flex items-center justify-center">
         <Link to="/">
           <span className="text-lg font-bold text-purple-800">SimpleCRM</span>
@@ -59,7 +59,7 @@ function Sidebar() {
               <span className="text-gray-700 ml-2">Transactions</span>
             </li>
           </Link>
-          <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">
+          {/* <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">
             USEFUL
           </p>
           <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
@@ -81,7 +81,7 @@ function Sidebar() {
           </li>
           <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
             <span className="text-gray-700 ml-2">Settings</span>
-          </li>
+          </li> */}
 
           <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">USER</p>
           <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
@@ -96,10 +96,10 @@ function Sidebar() {
           </Link>
         </ul>
       </div>
-      <div className="flex items-center p-2 cursor-pointer hover:bg-purple-100 mt-8">
+      {/* <div className="flex items-center p-2 cursor-pointer hover:bg-purple-100 mt-8">
         <LightModeOutlinedIcon />
         <span className="text-gray-700 ml-2">Theme</span>
-      </div>
+      </div> */}
     </div>
   );
 }

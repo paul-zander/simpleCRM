@@ -1,26 +1,26 @@
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import PendingIcon from "@mui/icons-material/Pending";
 
-function getStatusColorClasses(status) {
-  let textColorClass = "";
-  let bgColorClass = "";
+// function getStatusColorClasses(status) {
+//   let textColorClass = "";
+//   let bgColorClass = "";
 
-  if (status === "pending") {
-    textColorClass = "text-yellow-600";
-    bgColorClass = "bg-yellow-100";
-  } else if (status === "active") {
-    textColorClass = "text-green-600";
-    bgColorClass = "bg-green-100";
-  } else if (status === "passive") {
-    textColorClass = "text-red-600";
-    bgColorClass = "bg-red-100";
-  } else {
-    textColorClass = "text-gray-600";
-    bgColorClass = "bg-gray-100";
-  }
+//   if (status === "pending") {
+//     textColorClass = "text-yellow-600";
+//     bgColorClass = "bg-yellow-100";
+//   } else if (status === "active") {
+//     textColorClass = "text-green-600";
+//     bgColorClass = "bg-green-100";
+//   } else if (status === "passive") {
+//     textColorClass = "text-red-600";
+//     bgColorClass = "bg-red-100";
+//   } else {
+//     textColorClass = "text-gray-600";
+//     bgColorClass = "bg-gray-100";
+//   }
 
-  return `${textColorClass} ${bgColorClass}`;
-}
+//   return `${textColorClass} ${bgColorClass}`;
+// }
 
 export const userColumns = [
   { field: "id", headerName: "ID", width: 100, sortable: false },

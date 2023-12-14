@@ -12,17 +12,17 @@ function Navbar() {
       className="h-[50px] flex items-center text-sm border-b
     "
     >
-      <div className="w-full p-[20px] flex items-center justify-between">
-        <div className="flex items-center p-[3px]">
+      <div className="w-full p-[20px] flex items-center justify-end">
+        {/* <div className="flex items-center p-[3px]">
           <input
             className="placeholder:text-sm outline-none"
             type="text"
             placeholder="Search..."
           />
           <SearchOutlinedIcon />
-        </div>
+        </div> */}
         <div className="flex items-center">
-          <div className="flex items-center mr-[20px] relative">
+          {/* <div className="flex items-center mr-[20px] relative">
             <LanguageOutlinedIcon className="text-[20px]" />
             English
           </div>
@@ -46,14 +46,14 @@ function Navbar() {
           </div>
           <div className="flex items-center mr-[20px] relative">
             <ListOutlinedIcon className="text-[20px]" />
-          </div>
-          <div className="flex items-center mr-[20px] relative">
+          </div> */}
+          {/* <div className="flex items-center mr-[20px] relative">
             <img
               src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
               alt=""
               className="w-[30px] h-[30px] rounded-full"
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -1,9 +1,13 @@
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
-import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
+// import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
+import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined";
+
+import { revenuePercentage } from "../data/transactions";
+import { transactionsPercentage } from "../data/transactions";
+import { totalDecember } from "../data/transactions";
 
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
@@ -12,7 +16,7 @@ import { Link } from "react-router-dom";
 
 function Widget({ type }) {
   const [users, setUsers] = useState([]);
-  const [products, setProducts] = useState([]);
+  // const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function getAllData() {
@@ -21,24 +25,60 @@ function Widget({ type }) {
       const userData = userSnapshot.docs.map((doc) => doc.data());
 
       // Fetch product data
-      const productSnapshot = await getDocs(collection(db, "products"));
-      const productData = productSnapshot.docs.map((doc) => doc.data());
+      // const productSnapshot = await getDocs(collection(db, "products"));
+      // const productData = productSnapshot.docs.map((doc) => doc.data());
 
       // Combine user and product data
       setUsers(userData);
-      setProducts(productData);
+      // setProducts(productData);
     }
 
     getAllData();
   }, []);
 
+  // console.log(users[0].timeStamp.toDate());
+
+  function getAllUserDates() {
+    const userCreationDates = users
+      .filter((user) => user.timeStamp) // Filter out users without timeStamp
+      .map((user) => user.timeStamp.toDate());
+    return userCreationDates;
+  }
+
+  function getUserCreationForSpecificMonth(month) {
+    return getAllUserDates().filter(
+      (date) => date.getMonth() === getMonthNumber(month)
+    );
+  }
+
+  function getMonthNumber(month) {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    return months.indexOf(month);
+  }
+
+  const userCreationsDec = getUserCreationForSpecificMonth("Dec");
+  const userCreationsNov = getUserCreationForSpecificMonth("Nov");
+
+  let userPercentage = (
+    ((userCreationsDec.length - userCreationsNov.length) /
+      userCreationsNov.length) *
+    100
+  ).toFixed(0);
+
   let data;
-
-  console.log(users);
-
-  // temporary
-  const amount = 100;
-  const percentage = 20;
 
   switch (type) {
     case "user":
@@ -49,6 +89,7 @@ function Widget({ type }) {
         link: "See all users",
         linkPath: "/users",
         toolTipText: "Compared to last month",
+        percentage: userPercentage,
         icon: (
           <PersonOutlinedIcon
             className="p-[5px] rounded-sm self-end"
@@ -67,8 +108,9 @@ function Widget({ type }) {
         link: "View all transactions",
         linkPath: "/transactions",
         toolTipText: "Compared to last month",
+        percentage: transactionsPercentage,
         icon: (
-          <ShoppingCartOutlinedIcon
+          <CreditCardOutlinedIcon
             className="p-[5px] rounded-sm self-end"
             style={{
               backgroundColor: "rgba(218, 165, 32, 0.2)",
@@ -78,27 +120,30 @@ function Widget({ type }) {
         ),
       };
       break;
-    case "products":
+    // case "products":
+    //   data = {
+    //     title: "PRODUCTS",
+    //     amount: products.length,
+    //     isMoney: false,
+    //     link: "View all products",
+    //     linkPath: "/products",
+    //     toolTipText: "Compared to last month",
+    //     icon: (
+    //       <Inventory2OutlinedIcon
+    //         className="p-[5px] rounded-sm self-end"
+    //         style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
+    //       />
+    //     ),
+    //   };
+    //   break;
+    case "revenue":
       data = {
-        title: "PRODUCTS",
-        amount: products.length,
-        isMoney: false,
-        link: "View all products",
-        linkPath: "/products",
-        toolTipText: "Compared to last month",
-        icon: (
-          <Inventory2OutlinedIcon
-            className="p-[5px] rounded-sm self-end"
-            style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
-          />
-        ),
-      };
-      break;
-    case "balance":
-      data = {
-        title: "BALANCE",
+        title: "REVENUE (CURRENT MONTH)",
+        amount: totalDecember,
         isMoney: true,
-        link: "See details",
+        // link: "See details",
+        toolTipText: "Compared to last month",
+        percentage: revenuePercentage,
         icon: (
           <AccountBalanceWalletOutlinedIcon
             className="p-[5px] rounded-sm self-end"
@@ -115,26 +160,34 @@ function Widget({ type }) {
   }
 
   return (
-    <div className="flex flex-1 justify-between p-2.5 shadow-3xl rounded-md h-[100px]">
+    <div className="flex flex-1 justify-between p-2.5 shadow-3xl rounded-md h-[120px]">
       {/* left side */}
       <div className="flex flex-col justify-between">
         <span className="font-bold text-sm text-gray-600">{data.title}</span>
         <span className="text-3xl font-light">
           {data?.amount} {data.isMoney && "€"}
         </span>
-        <Link to={data.linkPath}>
-          <span className="text-sm border-b">{data.link}</span>
-        </Link>
+        {data.linkPath && (
+          <Link to={data.linkPath}>
+            <span className="text-sm border-b">{data.link}</span>
+          </Link>
+        )}
       </div>
       {/* right side */}
       <div className="flex flex-col justify-between">
         {/* NEED TO ADD: positive ? font color green : font color red */}
         <div
-          className="flex items-center text-sm text-green-500"
+          className={`flex items-center text-sm ${
+            data.percentage > 0 ? "text-green-500" : "text-red-500"
+          }`}
           title={data.toolTipText}
         >
-          <KeyboardArrowUpOutlinedIcon />
-          {percentage} %
+          {data.percentage < 0 ? (
+            <KeyboardArrowDownIcon />
+          ) : (
+            <KeyboardArrowUpOutlinedIcon />
+          )}
+          {data?.percentage} %
         </div>
         {data.icon}
       </div>

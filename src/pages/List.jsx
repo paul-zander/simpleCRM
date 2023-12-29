@@ -4,10 +4,10 @@ import Sidebar from "../components/Sidebar.jsx";
 
 function List({ columns, category }) {
   return (
-    <div className="flex w-full">
+    <div className="flex w-full flex-col md:flex-row">
       <Sidebar />
-      <div className="flex-6">
-        <Navbar />
+      <div className="flex-6 md:ml-[200px]">
+        {/* <Navbar /> */}
         <Datatable columns={columns} category={category} />
       </div>
     </div>

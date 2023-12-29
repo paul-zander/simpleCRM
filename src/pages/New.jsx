@@ -185,7 +185,7 @@ function New({ inputs, title }) {
   return (
     <div className="w-full flex">
       <Sidebar />
-      <div className="flex-6">
+      <div className="flex-6 ml-[200px]">
         <Navbar />
         <Toaster />
         {/* top */}
@@ -264,7 +264,7 @@ function New({ inputs, title }) {
                   uploadProgress !== null && uploadProgress < 100
                     ? "bg-[#0080803d]"
                     : ""
-                } w-[150px] p-[10px] border-none bg-[#008080] hover:bg-[#63a5a5] text-white text-bold cursor-pointer mt-[10px]`}
+                } w-[150px] p-[10px] border-none bg-[#1976D2] hover:bg-[#7db2e7] text-white text-bold cursor-pointer mt-[10px]`}
                 type="submit"
                 disabled={uploadProgress !== null && uploadProgress < 100}
               >

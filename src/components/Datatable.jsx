@@ -4,25 +4,10 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase.jsx";
+import Box from "@mui/material/Box";
 
 function Datatable({ columns, category }) {
-  // const [data, setData] = useState(userRows);
   const [data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   async function getData() {
-  //     const querySnapshot = await getDocs(collection(db, `${category}`));
-  //     querySnapshot.forEach((doc) => {
-  //       // doc.data() is never undefined for query doc snapshots
-  //       console.log(doc.id, " => ", doc.data());
-  //       const data = doc.data();
-  //       setData((prev) => [...prev, data]);
-  //     });
-  //   }
-  //   getData();
-  // }, [category]);
-
-  console.log(data);
 
   useEffect(() => {
     async function getData() {
@@ -35,8 +20,6 @@ function Datatable({ columns, category }) {
   function handleDelete(id) {
     setData(data.filter((item) => item.id !== id));
   }
-
-  console.log(data);
 
   const actionColumn = [
     {
@@ -74,8 +57,8 @@ function Datatable({ columns, category }) {
     },
   ];
   return (
-    <div className="h-[600px] p-[20px]">
-      <div className="w-full text-sm text-gray-600 font-bold mb-6 flex items-center gap-5">
+    <div className="h-full p-[20px] flex flex-col items-center justify-center">
+      <div className="text-sm text-gray-600 font-bold mb-6 flex items-center gap-5">
         {`ADD NEW ${category === "users" ? "USER" : "PRODUCT"}`}
         <Link
           to={`/${category}/new`}
@@ -84,14 +67,28 @@ function Datatable({ columns, category }) {
           Add New
         </Link>
       </div>
-      <DataGrid
-        className="datagrid"
-        rows={data}
-        columns={columns.concat(actionColumn)}
-        pageSize={9}
-        rowsPerPageOptions={[9]}
-        // checkboxSelection
-      />
+      <Box
+        sx={{
+          height: "600",
+          width: {
+            xs: "100%",
+            sm: "100%",
+            md: "650px",
+            lg: "900px",
+            xl: "100%",
+          },
+          // padding: "16px",
+        }}
+      >
+        <DataGrid
+          className="datagrid"
+          rows={data}
+          columns={columns.concat(actionColumn)}
+          pageSize={9}
+          rowsPerPageOptions={[9]}
+          // checkboxSelection
+        />
+      </Box>
     </div>
   );
 }

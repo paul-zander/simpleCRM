@@ -68,7 +68,7 @@ const data = [
 
 function Chart({ aspect, title }) {
   return (
-    <div className="flex-4 shadow-3xl p-[10px]">
+    <div className="flex-4 shadow-3xl p-4 ">
       <div className="font-bold text-sm uppercase text-gray-600 mb-4">
         {title}
       </div>
@@ -91,8 +91,8 @@ function Chart({ aspect, title }) {
           <Area
             type="monotone"
             dataKey="Total"
-            stroke="#8884d7"
-            fill="#8884d8"
+            stroke="#3e98c7"
+            fill="#3e98c7"
           />
         </AreaChart>
       </ResponsiveContainer>

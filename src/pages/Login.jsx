@@ -32,7 +32,10 @@ function Login() {
 
   return (
     <div className="h-screen flex items-center justify-center">
-      <form className="flex flex-col gap-3" onSubmit={handleLogin}>
+      <form
+        className="flex flex-col gap-3 p-8 shadow-3xl"
+        onSubmit={handleLogin}
+      >
         <input
           className="w-[200px] border p-1"
           type="email"
@@ -45,7 +48,7 @@ function Login() {
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="bg-purple-400 text-white" type="submit">
+        <button className="bg-sky-400 text-white" type="submit">
           Login
         </button>
         {error && (

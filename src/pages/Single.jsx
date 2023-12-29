@@ -15,7 +15,6 @@ import SingleProduct from "./SingleProduct.jsx";
 
 function SinglePage() {
   const { userId, productId } = useParams();
-  console.log(userId, productId);
 
   const [data, setData] = useState([]);
 
@@ -29,25 +28,21 @@ function SinglePage() {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
         setData(docSnap.data());
-        console.log(productId);
       } else {
         // docSnap.data() will be undefined in this case
-        console.log("No such document!");
-        console.log(productId);
       }
     }
     getData();
   }, [userId, productId]);
 
   return (
-    <div className="flex w-full">
+    <div className="flex w-full flex-col md:flex-row">
       <Sidebar />
-      <div className="flex-6">
-        <Navbar />
+      <div className="flex-6 md:ml-[200px]">
+        {/* <Navbar /> */}
         {/* top */}
-        <div className="flex p-[20px] gap-[20px]">
+        <div className="flex flex-col p-[20px] gap-[20px]">
           {/* information card */}
           <div className="flex-1 shadow-3xl p-[20px] relative">
             <Link

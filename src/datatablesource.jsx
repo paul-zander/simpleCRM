@@ -106,7 +106,7 @@ export const transactionsColumns = [
   {
     field: "id",
     headerName: "Transaction ID",
-    width: 150,
+    width: 120,
     sortable: false,
   },
   {
@@ -125,7 +125,7 @@ export const transactionsColumns = [
   {
     field: "customer",
     headerName: "Customer",
-    width: 200,
+    width: 150,
   },
   {
     field: "customerID",
@@ -135,17 +135,17 @@ export const transactionsColumns = [
   {
     field: "date",
     headerName: "Date",
-    width: 150,
+    width: 100,
   },
   {
     field: "method",
     headerName: "Payment Method",
-    width: 200,
+    width: 150,
   },
   {
     field: "status",
     headerName: "Status",
-    width: 130,
+    width: 100,
     renderCell: (params) => {
       return (
         <div

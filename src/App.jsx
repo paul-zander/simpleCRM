@@ -10,11 +10,13 @@ import List from "./pages/List.jsx";
 import Single from "./pages/Single.jsx";
 import New from "./pages/New.jsx";
 import Edit from "./pages/Edit.jsx";
+import NewTransaction from "./pages/NewTransaction.jsx";
 import { userInputs, productInputs } from "./formSource.jsx";
 import { AuthContext } from "./contexts/AuthContext.jsx";
 import { useContext } from "react";
 import { userColumns, productColumns } from "./datatablesource.jsx";
 import Transactions from "./pages/Transactions.jsx";
+import Sidebar from "./components/Sidebar.jsx";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -113,6 +115,7 @@ function App() {
             />
           </Route>
           <Route path="transactions" element={<Transactions />} />
+          <Route path="add-transaction" element={<NewTransaction />}></Route>
         </Route>
       </Routes>
     </Router>

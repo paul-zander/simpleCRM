@@ -7,10 +7,16 @@ import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNone
 import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
+import Logo from "../assets/img/logo.png";
 import { Link } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
+import { useState } from "react";
 
 function Sidebar() {
+  const [sidebarIsVisible, setSidebarIsVisible] = useState(false);
+
   const auth = getAuth();
   function logOut() {
     signOut(auth)
@@ -25,41 +31,69 @@ function Sidebar() {
       });
   }
   return (
-    <div className="flex-1 min-h-screen bg-white shadow-3xl">
-      <div className="h-[50px] flex items-center justify-center">
+    <>
+      {/* sidebar top */}
+      <div className="md:hidden p-4 flex justify-between items-center w-full shadow-md">
         <Link to="/">
-          <span className="text-lg font-bold text-purple-800">SimpleCRM</span>
+          {/* <span className="text-lg font-bold text-[#1976D2]">SimpleCRM</span> */}
+          <img src={Logo} alt="" className="h-[40px]" />
         </Link>
+        <div
+          className="rounded-full h-12 w-12 shadow-3xl flex justify-center items-center cursor-pointer"
+          onClick={() => setSidebarIsVisible(!sidebarIsVisible)}
+        >
+          {sidebarIsVisible ? (
+            <CloseIcon fontSize="small" />
+          ) : (
+            <MenuIcon fontSize="small" />
+          )}
+        </div>
       </div>
-      <div className="pl-[10px]">
-        <ul className="list-none">
-          <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">MAIN</p>
+      {/* main sidebar */}
+      <div
+        className={`${
+          sidebarIsVisible ? "translate-x-0" : "-translate-x-full"
+        } w-[200px] min-h-screen bg-white shadow-3xl fixed z-50 md:translate-x-0 transition-transform duration-300 ease-in-out p-6`}
+      >
+        <div className="h-[50px] flex items-center justify-center">
           <Link to="/">
-            <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-              <SpaceDashboardOutlinedIcon fontSize="small" />
-              <span className="text-gray-700 ml-2">Dashboard</span>
-            </li>
+            {/* <span className="text-lg font-bold text-[#1976D2]">SimpleCRM</span> */}
+            <img src={Logo} alt="" className="h-[40px]" />
           </Link>
-          <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">LISTS</p>
-          <Link to="/users">
-            <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-              <Person2OutlinedIcon fontSize="small" />
-              <span className="text-gray-700 ml-2">Users</span>
-            </li>
-          </Link>
-          <Link to="/products">
-            <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-              <Inventory2OutlinedIcon fontSize="small" />
-              <span className="text-gray-700 ml-2">Products</span>
-            </li>
-          </Link>
-          <Link to="/transactions">
-            <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-              <CreditCardOutlinedIcon fontSize="small" />
-              <span className="text-gray-700 ml-2">Transactions</span>
-            </li>
-          </Link>
-          {/* <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">
+        </div>
+        <div className="pl-[10px]">
+          <ul className="list-none">
+            <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">
+              MAIN
+            </p>
+            <Link to="/">
+              <li className="flex items-center p-2 cursor-pointer hover:bg-blue-100">
+                <SpaceDashboardOutlinedIcon fontSize="small" />
+                <span className="text-gray-700 ml-2">Dashboard</span>
+              </li>
+            </Link>
+            <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">
+              LISTS
+            </p>
+            <Link to="/users">
+              <li className="flex items-center p-2 cursor-pointer hover:bg-blue-100">
+                <Person2OutlinedIcon fontSize="small" />
+                <span className="text-gray-700 ml-2">Users</span>
+              </li>
+            </Link>
+            <Link to="/products">
+              <li className="flex items-center p-2 cursor-pointer hover:bg-blue-100">
+                <Inventory2OutlinedIcon fontSize="small" />
+                <span className="text-gray-700 ml-2">Products</span>
+              </li>
+            </Link>
+            <Link to="/transactions">
+              <li className="flex items-center p-2 cursor-pointer hover:bg-blue-100">
+                <CreditCardOutlinedIcon fontSize="small" />
+                <span className="text-gray-700 ml-2">Transactions</span>
+              </li>
+            </Link>
+            {/* <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">
             USEFUL
           </p>
           <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
@@ -83,24 +117,27 @@ function Sidebar() {
             <span className="text-gray-700 ml-2">Settings</span>
           </li> */}
 
-          <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">USER</p>
-          <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-            <AccountBoxOutlinedIcon fontSize="small" />
-            <span className="text-gray-700 ml-2">Profile</span>
-          </li>
-          <Link to="/login" onClick={logOut}>
-            <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-              <LogoutOutlinedIcon fontSize="small" />
-              <span className="text-gray-700 ml-2">Logout</span>
+            <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">
+              USER
+            </p>
+            <li className="flex items-center p-2 cursor-pointer hover:bg-blue-100">
+              <AccountBoxOutlinedIcon fontSize="small" />
+              <span className="text-gray-700 ml-2">Profile</span>
             </li>
-          </Link>
-        </ul>
-      </div>
-      {/* <div className="flex items-center p-2 cursor-pointer hover:bg-purple-100 mt-8">
+            <Link to="/login" onClick={logOut}>
+              <li className="flex items-center p-2 cursor-pointer hover:bg-blue-100">
+                <LogoutOutlinedIcon fontSize="small" />
+                <span className="text-gray-700 ml-2">Logout</span>
+              </li>
+            </Link>
+          </ul>
+        </div>
+        {/* <div className="flex items-center p-2 cursor-pointer hover:bg-purple-100 mt-8">
         <LightModeOutlinedIcon />
         <span className="text-gray-700 ml-2">Theme</span>
       </div> */}
-    </div>
+      </div>
+    </>
   );
 }
 

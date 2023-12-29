@@ -160,7 +160,7 @@ function Widget({ type }) {
   }
 
   return (
-    <div className="flex flex-1 justify-between p-2.5 shadow-3xl rounded-md h-[120px]">
+    <div className="flex flex-1 justify-between p-4 shadow-3xl rounded-md h-[120px]">
       {/* left side */}
       <div className="flex flex-col justify-between">
         <span className="font-bold text-sm text-gray-600">{data.title}</span>
@@ -174,7 +174,7 @@ function Widget({ type }) {
         )}
       </div>
       {/* right side */}
-      <div className="flex flex-col justify-between">
+      <div className="flex flex-col justify-between gap-5">
         {/* NEED TO ADD: positive ? font color green : font color red */}
         <div
           className={`flex items-center text-sm ${

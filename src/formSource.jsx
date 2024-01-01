@@ -24,11 +24,11 @@ export const userInputs = [
     type: "text",
     placeholder: "0152 28817386",
   },
-  {
-    id: "password",
-    label: "Password",
-    type: "password",
-  },
+  // {
+  //   id: "password",
+  //   label: "Password",
+  //   type: "password",
+  // },
   {
     id: "adress",
     label: "Address",

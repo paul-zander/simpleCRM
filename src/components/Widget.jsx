@@ -5,16 +5,21 @@ import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalance
 // import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined";
 
-import { revenuePercentage } from "../data/transactions";
-import { transactionsPercentage } from "../data/transactions";
-import { totalDecember } from "../data/transactions";
+// import { revenuePercentage } from "../data/transactions";
+// import { transactionsPercentage } from "../data/transactions";
+// import { totalCurrentMonth } from "../data/transactions";
 
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function Widget({ type }) {
+function Widget({
+  type,
+  transactionsPercentage,
+  totalCurrentMonth,
+  revenuePercentage,
+}) {
   const [users, setUsers] = useState([]);
   // const [products, setProducts] = useState([]);
 
@@ -46,35 +51,22 @@ function Widget({ type }) {
   }
 
   function getUserCreationForSpecificMonth(month) {
-    return getAllUserDates().filter(
-      (date) => date.getMonth() === getMonthNumber(month)
-    );
+    return getAllUserDates().filter((date) => date.getMonth() === month);
   }
 
-  function getMonthNumber(month) {
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    return months.indexOf(month);
-  }
+  const currentMonth = new Date().getMonth();
+  const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
 
-  const userCreationsDec = getUserCreationForSpecificMonth("Dec");
-  const userCreationsNov = getUserCreationForSpecificMonth("Nov");
+  const userCreationsCurrentMonth =
+    getUserCreationForSpecificMonth(currentMonth);
+  const userCreationsPreviousMonth =
+    getUserCreationForSpecificMonth(previousMonth);
+
+  console.log(userCreationsCurrentMonth, userCreationsPreviousMonth);
 
   let userPercentage = (
-    ((userCreationsDec.length - userCreationsNov.length) /
-      userCreationsNov.length) *
+    ((userCreationsCurrentMonth.length - userCreationsPreviousMonth.length) /
+      userCreationsPreviousMonth.length) *
     100
   ).toFixed(0);
 
@@ -139,7 +131,7 @@ function Widget({ type }) {
     case "revenue":
       data = {
         title: "REVENUE (CURRENT MONTH)",
-        amount: totalDecember,
+        amount: totalCurrentMonth,
         isMoney: true,
         // link: "See details",
         toolTipText: "Compared to last month",

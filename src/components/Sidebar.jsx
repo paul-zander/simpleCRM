@@ -9,7 +9,7 @@ import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
-import Logo from "../assets/img/logo.png";
+import Logo from "../assets/img/logo.svg";
 import { Link } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import { useState } from "react";
@@ -33,10 +33,10 @@ function Sidebar() {
   return (
     <>
       {/* sidebar top */}
-      <div className="md:hidden p-4 flex justify-between items-center w-full shadow-md">
+      <div className="md:hidden p-4 flex justify-between items-center w-full shadow-md bg-gray-50">
         <Link to="/">
           {/* <span className="text-lg font-bold text-[#1976D2]">SimpleCRM</span> */}
-          <img src={Logo} alt="" className="h-[40px]" />
+          <img src={Logo} alt="" className="h-[70px]" />
         </Link>
         <div
           className="rounded-full h-12 w-12 shadow-3xl flex justify-center items-center cursor-pointer"
@@ -53,15 +53,15 @@ function Sidebar() {
       <div
         className={`${
           sidebarIsVisible ? "translate-x-0" : "-translate-x-full"
-        } w-[200px] min-h-screen bg-white shadow-3xl fixed z-50 md:translate-x-0 transition-transform duration-300 ease-in-out p-6`}
+        } w-[200px] min-h-screen shadow-3xl fixed z-50 md:translate-x-0 transition-transform duration-300 ease-in-out p-6 bg-gray-50`}
       >
         <div className="h-[50px] flex items-center justify-center">
           <Link to="/">
             {/* <span className="text-lg font-bold text-[#1976D2]">SimpleCRM</span> */}
-            <img src={Logo} alt="" className="h-[40px]" />
+            <img src={Logo} alt="" className="h-[100px]" />
           </Link>
         </div>
-        <div className="pl-[10px]">
+        <div className="">
           <ul className="list-none">
             <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">
               MAIN

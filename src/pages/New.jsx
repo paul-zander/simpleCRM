@@ -14,6 +14,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import toast from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
+import { ErrorTwoTone } from "@mui/icons-material";
 
 function New({ inputs, title }) {
   const [file, setFile] = useState("");
@@ -110,48 +111,46 @@ function New({ inputs, title }) {
 
   console.log("render happended");
 
-  function checkIfImageUploaded() {
-    if (file === "") {
-      toast.error("Please upload an image.");
-      return true;
-    }
-    return false;
-  }
+  // function checkIfImageUploaded() {
+  //   if (file === "") {
+  //     toast.error("Please upload an image.");
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   async function addData(e) {
     e.preventDefault();
-    if (checkIfImageUploaded()) {
-      return;
-    }
+    // if (checkIfImageUploaded()) {
+    //   return;
+    // }
 
     console.log(title);
     if (title === "Add New User") {
       try {
-        // await uploadFile();
-        const res = await createUserWithEmailAndPassword(
-          auth,
-          data.email,
-          data.password
-        );
-        // await uploadFile();
+        // const res = await createUserWithEmailAndPassword(
+        //   auth,
+        //   data.email,
+        //   data.password
+        // );
 
-        console.log(data);
         // await setDoc(doc(db, "users", res.user.uid), {
         //   ...data,
         //   timeStamp: serverTimestamp(),
         //   id: res.user.uid,
         // });
-        await setDoc(doc(db, "users", res.user.uid), {
+        const ref = doc(collection(db, "users"));
+
+        await setDoc(ref, {
           ...data,
           timeStamp: serverTimestamp(),
-          id: res.user.uid,
+          id: ref.id,
         });
-        console.log(data);
+
         toast.success("New user added");
         setFile("");
         setData({});
       } catch (error) {
-        console.log(error);
         toast.error("Upload failed. User already exists.");
       }
     } else if (title === "Add New Product") {

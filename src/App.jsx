@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
 import List from "./pages/List.jsx";
 import Single from "./pages/Single.jsx";
 import New from "./pages/New.jsx";
@@ -30,6 +31,7 @@ function App() {
       <Routes>
         <Route path="/">
           <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
           <Route
             index
             element={

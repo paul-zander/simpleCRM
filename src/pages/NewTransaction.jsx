@@ -1,4 +1,4 @@
-import { generatedOrders } from "../data/transactions";
+// import { generatedOrders } from "../data/transactions";
 import { useState, useEffect } from "react";
 import { doc, getDocs, setDoc, collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase.jsx";
@@ -131,6 +131,23 @@ function NewTransaction() {
       [field]: value,
     }));
   };
+
+  // const handleInputChange = (field, value) => {
+  //   if (field === "date") {
+  //     // Formatieren des ausgewählten Datums
+  //     const formattedDate = formatDate(value);
+
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       [field]: formattedDate,
+  //     }));
+  //   } else {
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       [field]: value,
+  //     }));
+  //   }
+  // };
 
   return (
     <div className="flex w-full flex-col md:flex-row">

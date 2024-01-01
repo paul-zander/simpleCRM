@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 // import { userRows, userColumns } from "../datatablesource.jsx";
 import { Link } from "react-router-dom";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase.jsx";
 import Box from "@mui/material/Box";
+import CloseIcon from "@mui/icons-material/Close";
 
 function Datatable({ columns, category }) {
   const [data, setData] = useState([]);
+  const [deleteModalIsVisible, setDeleteModalIsVisible] = useState(false);
+  const [deleteModalId, setDeleteModalId] = useState(null);
 
   useEffect(() => {
     async function getData() {
@@ -17,8 +20,17 @@ function Datatable({ columns, category }) {
     getData();
   }, [category]);
 
-  function handleDelete(id) {
-    setData(data.filter((item) => item.id !== id));
+  async function handleDelete() {
+    if (deleteModalId) {
+      await deleteDoc(doc(db, "users", deleteModalId));
+      setData(data.filter((item) => item.id !== deleteModalId));
+      toggleDeleteModal(null); // Schließe das Modal nach dem Löschen und setze deleteModalId zurück
+    }
+  }
+
+  function toggleDeleteModal(id) {
+    setDeleteModalId(id);
+    setDeleteModalIsVisible(!deleteModalIsVisible);
   }
 
   const actionColumn = [
@@ -47,7 +59,8 @@ function Datatable({ columns, category }) {
             {/* delete btn */}
             <div
               className="py-[2px] px-[5px] rounded-sm text-red-900 border border-dotted border-red-900 cursor-pointer"
-              onClick={() => handleDelete(params.row.id)}
+              // onClick={() => handleDelete(params.row.id)}
+              onClick={() => toggleDeleteModal(params.row.id)}
             >
               Delete
             </div>
@@ -57,14 +70,39 @@ function Datatable({ columns, category }) {
     },
   ];
   return (
-    <div className="h-full p-[20px] flex flex-col items-center justify-center">
+    <div className="h-full p-[20px] flex flex-col items-center justify-center relative">
+      {deleteModalIsVisible && (
+        <div className="absolute w-full h-full bg-white/75 z-40"></div>
+      )}
+      {deleteModalIsVisible && (
+        <div className="absolute flex flex-col items-center justify-center gap-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 z-50 bg-white shadow-3xl rounded-sm max-w-md">
+          <CloseIcon className="absolute right-3 top-3 cursor-pointer text-gray-500 rounded-full hover:text-gray-300" />
+          <p className="text-2xl bg-[#fce4e3] rounded-full p-2">❗</p>
+          <h3 className="text-center">
+            Are you sure you want to delete this user?
+          </h3>
+          <p className="text-center">
+            This will delete this user permanently. You cannot undo this action.
+          </p>
+          <div className="flex gap-4">
+            <button className="border-gray-400 border rounded-sm p-3">
+              Cancel
+            </button>
+            <button
+              className="rounded-sm bg-[#F8312F] hover:bg-[#fc5a58] p-3 text-white transition-all"
+              onClick={handleDelete}
+            >
+              Yes, Delete!
+            </button>
+          </div>
+        </div>
+      )}
       <div className="text-sm text-gray-600 font-bold mb-6 flex items-center gap-5">
-        {`ADD NEW ${category === "users" ? "USER" : "PRODUCT"}`}
         <Link
           to={`/${category}/new`}
           className="text-white text-base font-normal bg-green-600 hover:bg-green-500  p-[5px] rounded-md cursor-pointer"
         >
-          Add New
+          Add New {category === "users" ? "User" : "Product"}
         </Link>
       </div>
       <Box

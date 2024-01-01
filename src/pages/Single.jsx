@@ -3,9 +3,10 @@ import Navbar from "../components/Navbar.jsx";
 import Chart from "../components/Chart.jsx";
 // import BasicTable from "../components/BasicTable.jsx";
 import { Link, useParams } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { db } from "../firebase.jsx";
 import { useState, useEffect } from "react";
+import { formatDate } from "../utils/formatDate.js";
 import SingleUser from "./SingleUser.jsx";
 import SingleProduct from "./SingleProduct.jsx";
 // import { transactionsColumns } from "../datatablesource";
@@ -17,6 +18,7 @@ function SinglePage() {
   const { userId, productId } = useParams();
 
   const [data, setData] = useState([]);
+  const [generatedOrders, setGeneratedOrders] = useState([]);
 
   useEffect(() => {
     async function getData() {
@@ -36,6 +38,26 @@ function SinglePage() {
     getData();
   }, [userId, productId]);
 
+  useEffect(() => {
+    async function loadData() {
+      const querySnapshot = await getDocs(collection(db, "transactions"));
+      const formattedOrders = [];
+
+      querySnapshot.forEach((doc) => {
+        const formattedTransaction = {
+          ...doc.data(),
+          date: formatDate(doc.data().date),
+          price: +doc.data().price,
+        };
+        formattedOrders.push(formattedTransaction);
+      });
+
+      setGeneratedOrders(formattedOrders);
+    }
+
+    loadData();
+  }, []);
+
   return (
     <div className="flex w-full flex-col md:flex-row">
       <Sidebar />
@@ -50,7 +72,7 @@ function SinglePage() {
                 userId ? `/users/edit/${userId}` : `/products/edit/${productId}`
               }
             >
-              <div className="absolute top-0 right-0 p-2 text-sm text-purple-600 bg-purple-100 cursor-pointer rounded-bl-md">
+              <div className="absolute top-3 right-3 p-2 text-sm text-sky-600 bg-sky-200 hover:bg-sky-100 cursor-pointer w-[80px] text-center transition-all">
                 Edit
               </div>
             </Link>
@@ -62,7 +84,16 @@ function SinglePage() {
           </div>
           {/* chart */}
           <div className="flex-2">
-            <Chart aspect={3 / 1} title="User Spending (Last 6 Months)" />
+            <Chart
+              aspect={3 / 1}
+              title={
+                userId
+                  ? "User Spending (Last 6 Months)"
+                  : "Spending for this product (Last 6 Months)"
+              }
+              generatedOrders={generatedOrders}
+              data={data}
+            />
           </div>
         </div>
         {/* bottom */}

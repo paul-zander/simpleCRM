@@ -3,9 +3,9 @@ import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDown
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { generatedOrders } from "../data/transactions";
+// import { generatedOrders } from "../data/transactions";
 
-function Featured() {
+function Featured({ generatedOrders }) {
   const now = new Date();
   const previousMonth = new Date();
   previousMonth.setMonth(now.getMonth() - 1);
@@ -42,7 +42,7 @@ function Featured() {
         </h2>
         {/* <MoreVertOutlinedIcon /> */}
       </div>
-      <div className="p-[20px] flex flex-col items-center justify-center gap-3.5">
+      <div className="p-[20px] flex flex-col items-center justify-center gap-7">
         <div style={{ width: 100, height: 100 }}>
           {/* <ProgressProvider /> */}
           <CircularProgressbar

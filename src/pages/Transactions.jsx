@@ -1,12 +1,11 @@
 import Sidebar from "../components/Sidebar";
 // import Navbar from "../components/Navbar";
 // import BasicTable from "../components/BasicTable";
-import { generatedOrders } from "../data/transactions";
+// import { generatedOrders } from "../data/transactions";
 import { DataGrid } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 
 import { transactionsColumns } from "../datatablesource";
-import PieChart from "../components/PieChart";
 import { Link } from "react-router-dom";
 
 // firebase imports
@@ -25,7 +24,6 @@ function Transactions() {
     getData();
   }, []);
 
-  console.log(generatedOrders);
   const products = transactions.map((order) => order.product);
   const itConsultingForFreelancers = products.filter(
     (product) => product === "IT Consulting for Freelancers"

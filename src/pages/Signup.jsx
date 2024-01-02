@@ -13,11 +13,13 @@ import { Toaster } from "react-hot-toast";
 function Login() {
   const [passwordError, setPasswordError] = useState(false);
   const [emailError, setEmailError] = useState(false);
+  const [alreadyInUseError, setAlreadyInUseError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [displayName, setDisplayName] = useState("");
 
   const navigate = useNavigate();
 
@@ -40,8 +42,11 @@ function Login() {
       .then((userCredential) => {
         // Signed up
         const user = userCredential.user;
+        user.displayName = displayName;
         toast.success("Successfully registered!");
-
+        setAlreadyInUseError(false);
+        setEmailError(false);
+        setPasswordError(false);
         // ...
         setTimeout(() => {
           navigate("/login");
@@ -55,6 +60,8 @@ function Login() {
         errorCode === "auth/weak-password" &&
           setPasswordError("Weak password. Please use at least 6 characters.");
         errorCode === "auth/invalid-email" && setEmailError("Invalid email.");
+        errorCode === "auth/email-already-in-use" &&
+          setAlreadyInUseError("Email already in use.");
 
         // ..
       });
@@ -73,7 +80,7 @@ function Login() {
   }
 
   return (
-    <div className="relative bg-[#eff7fc]">
+    <div className="relative bg-sky-50">
       <Toaster />
       <img src={Logo} alt="logo" className="h-[90px] absolute left-5 top-5" />
       <div className="h-screen flex flex-col items-center justify-center">
@@ -81,12 +88,20 @@ function Login() {
           className="flex flex-col gap-6 p-12 shadow-3xl items-center w-[500px] relative bg-white"
           onSubmit={handleSignup}
         >
-          <Link to="/login">
+          <Link to="/login" title="Back to login page">
             <ArrowBackIcon className="absolute left-6 top-6 cursor-pointer" />
           </Link>
           <div className="border-b-2 border-[#38B6FF] w-[150px] mb-4">
             <h2 className="text-4xl text-center mb-3">Sign up</h2>
           </div>
+          <input
+            className={`${
+              emailError ? "border-red-600" : "border-gray-300"
+            } w-full border  p-3 focus:outline-none focus:border-[#38B6FF]`}
+            type="name"
+            placeholder="Full name"
+            onChange={(e) => setDisplayName(e.target.value)}
+          />
           <input
             className={`${
               emailError ? "border-red-600" : "border-gray-300"
@@ -147,9 +162,9 @@ function Login() {
               Sign up
             </button>
           </div>
-          {(passwordError || emailError) && (
+          {(passwordError || emailError || alreadyInUseError) && (
             <span className="mt-3 text-red-600 text-sm text-center">
-              {passwordError || emailError}
+              {passwordError || emailError || alreadyInUseError}
             </span>
           )}
         </form>

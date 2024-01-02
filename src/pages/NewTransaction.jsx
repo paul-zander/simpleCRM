@@ -154,8 +154,11 @@ function NewTransaction() {
       <Toaster />
       <Sidebar />
       <div className="flex flex-col items-center justify-center w-full h-full md:ml-[200px] mt-24">
-        <div className="p-4 md:p-6 shadow-3xl">
-          <Link to="/transactions" className="cursor-pointer mb-5">
+        <div className="p-4 md:p-6 shadow-3xl relative">
+          <Link
+            to="/transactions"
+            className="cursor-pointer absolute left-3 top-[30px]"
+          >
             <ArrowBackIcon />
           </Link>
           <h2 className="text-4xl mb-6 text-center">Add new transaction</h2>

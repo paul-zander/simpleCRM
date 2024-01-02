@@ -9,6 +9,11 @@ function Authreducer(state, action) {
         currentUser: action.payload,
       };
     }
+    case "GUESTLOGIN": {
+      return {
+        currentUser: action.payload,
+      };
+    }
     case "LOGOUT": {
       return {
         currentUser: null,

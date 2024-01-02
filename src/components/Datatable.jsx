@@ -46,19 +46,19 @@ function Datatable({ columns, category }) {
               to={`/${category}/${params.id}`}
               style={{ textDecoration: "none" }}
             >
-              <div className="py-[2px] px-[5px] rounded-sm text-blue-900 border border-dotted border-blue-900 cursor-pointer">
+              <div className="py-[2px] px-[5px] rounded-sm text-blue-900 border border-dotted hover:border-solid border-blue-900 cursor-pointer">
                 View
               </div>
             </Link>
             {/* edit btn */}
             <Link to={`/${category}/edit/${params.id}`}>
-              <div className="py-[2px] px-[5px] rounded-sm text-green-900 border border-dotted border-green-900 cursor-pointer">
+              <div className="py-[2px] px-[5px] rounded-sm text-green-900 border border-dotted hover:border-solid border-green-900 cursor-pointer">
                 Edit
               </div>
             </Link>
             {/* delete btn */}
             <div
-              className="py-[2px] px-[5px] rounded-sm text-red-900 border border-dotted border-red-900 cursor-pointer"
+              className="py-[2px] px-[5px] rounded-sm text-red-900 border border-dotted hover:border-solid border-red-900 cursor-pointer"
               // onClick={() => handleDelete(params.row.id)}
               onClick={() => toggleDeleteModal(params.row.id)}
             >
@@ -71,12 +71,20 @@ function Datatable({ columns, category }) {
   ];
   return (
     <div className="h-full p-[20px] flex flex-col items-center justify-center relative">
+      {/* Overlay */}
       {deleteModalIsVisible && (
-        <div className="absolute w-full h-full bg-white/75 z-40"></div>
+        <div
+          className="absolute w-full h-full bg-white/75 z-40"
+          onClick={() => toggleDeleteModal(null)}
+        ></div>
       )}
+      {/* Delete modal */}
       {deleteModalIsVisible && (
         <div className="absolute flex flex-col items-center justify-center gap-8 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-8 z-50 bg-white shadow-3xl rounded-sm max-w-md">
-          <CloseIcon className="absolute right-3 top-3 cursor-pointer text-gray-500 rounded-full hover:text-gray-300" />
+          <CloseIcon
+            className="absolute right-3 top-3 cursor-pointer text-gray-500 rounded-full hover:text-gray-300"
+            onClick={() => toggleDeleteModal(null)}
+          />
           <p className="text-2xl bg-[#fce4e3] rounded-full p-2">❗</p>
           <h3 className="text-center">
             Are you sure you want to delete this user?
@@ -85,7 +93,10 @@ function Datatable({ columns, category }) {
             This will delete this user permanently. You cannot undo this action.
           </p>
           <div className="flex gap-4">
-            <button className="border-gray-400 border rounded-sm p-3">
+            <button
+              className="border-gray-400 hover:border-gray-700 border rounded-sm p-3 transition-all"
+              onClick={() => toggleDeleteModal(null)}
+            >
               Cancel
             </button>
             <button

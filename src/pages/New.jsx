@@ -185,10 +185,10 @@ function New({ inputs, title }) {
     <div className="w-full flex">
       <Sidebar />
       <div className="flex-6 ml-[200px]">
-        <Navbar />
+        {/* <Navbar /> */}
         <Toaster />
         {/* top */}
-        <div className="shadow-3xl p-[10px] m-[20px] flex">
+        <div className="p-[10px] m-[20px] flex justify-center">
           <h1 className="text-gray-400 text-md">{title}</h1>
         </div>
         {/* bottom */}

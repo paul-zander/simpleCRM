@@ -1,11 +1,15 @@
 // import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
+import { useState } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import CheckIcon from "@mui/icons-material/Check";
 // import { generatedOrders } from "../data/transactions";
 
 function Featured({ generatedOrders }) {
+  const [targetRevenue, setTargetRevenue] = useState(30000);
+
   const now = new Date();
   const previousMonth = new Date();
   previousMonth.setMonth(now.getMonth() - 1);
@@ -31,8 +35,12 @@ function Featured({ generatedOrders }) {
     0
   );
 
-  const targetRevenue = 20000;
+  // const targetRevenue = 20000;
   const percentage = (totalCurrentMonth / targetRevenue) * 100;
+
+  function handleTargetInput(e) {
+    e.preventDefault();
+  }
 
   return (
     <div className="flex-2 flex flex-col justify-center items-center shadow-3xl p-4 relative">
@@ -46,8 +54,8 @@ function Featured({ generatedOrders }) {
         <div style={{ width: 100, height: 100 }}>
           {/* <ProgressProvider /> */}
           <CircularProgressbar
-            value={percentage}
-            text={`${percentage}%`}
+            value={percentage.toFixed(0)}
+            text={`${percentage.toFixed(0)}%`}
             strokeWidth={7}
           />
           {/* <ProgressProvider /> */}
@@ -60,8 +68,20 @@ function Featured({ generatedOrders }) {
           Previous transactions processing. Last payments may not be included.
         </p>
         <div className="w-full flex items-center justify-around">
-          <div className="text-center">
-            <div className="text-sm">Target</div>
+          <div className="flex flex-col justify-center items-center">
+            <div className="text-sm">
+              <div className="flex justify-between items-center gap-2 border-2 p-1 w-40">
+                <input
+                  type="number"
+                  min="1"
+                  placeholder="Enter Target..."
+                  className="p-1 w-full focus:outline-none focus:border-sky-200"
+                  value=""
+                  onChange={(e) => setTargetRevenue(e.target.value)}
+                />
+                <CheckIcon fontSize={"small"} />
+              </div>
+            </div>
             {/* negative ? color red : green */}
             <div className="flex items-center mt-[10px] text-sm ">
               <div className="resultAmount">{targetRevenue} €</div>

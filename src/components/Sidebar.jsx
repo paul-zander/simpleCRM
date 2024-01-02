@@ -67,7 +67,9 @@ function Sidebar() {
               MAIN
             </p>
             <Link to="/">
-              <li className="flex items-center p-2 cursor-pointer hover:bg-blue-100">
+              <li
+                className={`flex items-center p-2 cursor-pointer hover:bg-sky-100`}
+              >
                 <SpaceDashboardOutlinedIcon fontSize="small" />
                 <span className="text-gray-700 ml-2">Dashboard</span>
               </li>
@@ -76,19 +78,25 @@ function Sidebar() {
               LISTS
             </p>
             <Link to="/users">
-              <li className="flex items-center p-2 cursor-pointer hover:bg-blue-100">
+              <li
+                className={`flex items-center p-2 cursor-pointer hover:bg-sky-100`}
+              >
                 <Person2OutlinedIcon fontSize="small" />
                 <span className="text-gray-700 ml-2">Users</span>
               </li>
             </Link>
             <Link to="/products">
-              <li className="flex items-center p-2 cursor-pointer hover:bg-blue-100">
+              <li
+                className={`flex items-center p-2 cursor-pointer hover:bg-sky-100`}
+              >
                 <Inventory2OutlinedIcon fontSize="small" />
                 <span className="text-gray-700 ml-2">Products</span>
               </li>
             </Link>
             <Link to="/transactions">
-              <li className="flex items-center p-2 cursor-pointer hover:bg-blue-100">
+              <li
+                className={`flex items-center p-2 cursor-pointer hover:bg-sky-100`}
+              >
                 <CreditCardOutlinedIcon fontSize="small" />
                 <span className="text-gray-700 ml-2">Transactions</span>
               </li>
@@ -120,12 +128,12 @@ function Sidebar() {
             <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">
               USER
             </p>
-            <li className="flex items-center p-2 cursor-pointer hover:bg-blue-100">
+            {/* <li className="flex items-center p-2 cursor-pointer hover:bg-sky-100">
               <AccountBoxOutlinedIcon fontSize="small" />
               <span className="text-gray-700 ml-2">Profile</span>
-            </li>
+            </li> */}
             <Link to="/login" onClick={logOut}>
-              <li className="flex items-center p-2 cursor-pointer hover:bg-blue-100">
+              <li className="flex items-center p-2 cursor-pointer hover:bg-sky-100">
                 <LogoutOutlinedIcon fontSize="small" />
                 <span className="text-gray-700 ml-2">Logout</span>
               </li>

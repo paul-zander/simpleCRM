@@ -28,6 +28,7 @@ function App() {
 
   return (
     <Router>
+      {/* <Sidebar /> */}
       <Routes>
         <Route path="login" element={<Login />} />
         <Route path="/">

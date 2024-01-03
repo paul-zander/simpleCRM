@@ -1,9 +1,9 @@
 // import { generatedOrders } from "../data/transactions";
 import { useState, useEffect } from "react";
-import { doc, getDocs, setDoc, collection, addDoc } from "firebase/firestore";
+import { getDocs, collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase.jsx";
 import SelectMenu from "../components/Select.jsx";
-import { formatDate } from "../utils/formatDate.js";
+// import { formatDate } from "../utils/formatDate.js";
 import toast from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
 import Sidebar from "../components/Sidebar.jsx";
@@ -76,6 +76,8 @@ function NewTransaction() {
   const paymentMethods = [
     { name: "PayPal", id: "PayPal" },
     { name: "Online Payment", id: "Online Payment" },
+    { name: "Apple Pay", id: "Apple Pay" },
+    { name: "Lastschriftverfahren", id: "Lastschriftverfahren" },
   ];
 
   useEffect(() => {
@@ -115,7 +117,7 @@ function NewTransaction() {
   async function uploadTransactionToFirebase(event) {
     event.preventDefault();
     await addDoc(collection(db, "transactions"), formData);
-    toast.success("Tranaction uploaded");
+    toast.success("Transaction uploaded");
     setFormData({
       customer: "",
       product: "",

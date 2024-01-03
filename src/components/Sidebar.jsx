@@ -12,10 +12,16 @@ import CloseIcon from "@mui/icons-material/Close";
 import Logo from "../assets/img/logo.svg";
 import { Link } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Sidebar() {
   const [sidebarIsVisible, setSidebarIsVisible] = useState(false);
+
+  useEffect(() => {
+    const item = localStorage.getItem("currentUser");
+    const currentuser = JSON.parse(item);
+    console.log(currentuser);
+  }, []);
 
   const auth = getAuth();
   function logOut() {

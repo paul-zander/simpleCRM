@@ -43,6 +43,7 @@ function Login() {
         // Signed in
         const user = userCredential.user;
         console.log(user);
+        localStorage.setItem("currentUser", JSON.stringify(user));
         dispatch({ type: "LOGIN", payload: user });
         navigate("/");
       })
@@ -56,6 +57,7 @@ function Login() {
   function handleGuestLogin(e) {
     e.preventDefault();
     dispatch({ type: "GUESTLOGIN", payload: "Guest" });
+
     navigate("/");
   }
 
@@ -77,8 +79,8 @@ function Login() {
             : "top-5 left-5 h-[90px]"
         }`}
       />
-      <div className="absolute right-10 top-10">
-        <span className="mr-4">Not a simpleCRM user?</span>{" "}
+      <div className="absolute flex flex-col gap-2 items-center top-36 right-1/2 translate-x-1/2 md:flex-row md:translate-x-0 md:right-10 md:top-10">
+        <span className="text-center">Not a simpleCRM user?</span>{" "}
         <Link to="/signup">
           <button className="bg-[#38B6FF] hover:bg-[#7fcbf7] text-white py-2 px-5 transition-all">
             Sign up
@@ -88,7 +90,7 @@ function Login() {
 
       <div className="h-screen flex flex-col items-center justify-center">
         <form
-          className="flex flex-col gap-6 p-12 shadow-3xl items-center w-[500px] bg-white"
+          className="flex flex-col gap-6 p-12 shadow-3xl items-center w-[300px] md:w-[500px] bg-white"
           onSubmit={handleLogin}
         >
           <div className="border-b-2 border-[#38B6FF] w-[150px] mb-4">

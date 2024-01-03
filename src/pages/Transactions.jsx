@@ -1,5 +1,5 @@
 import Sidebar from "../components/Sidebar";
-// import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar";
 // import BasicTable from "../components/BasicTable";
 // import { generatedOrders } from "../data/transactions";
 import { DataGrid } from "@mui/x-data-grid";
@@ -90,6 +90,7 @@ function Transactions() {
     <div className="flex w-screen flex-col md:flex-row">
       <Sidebar />
       <div className="flex justify-center flex-col items-center flex-grow md:ml-[200px] p-6">
+        {/* <div className="flex-6 md:ml-[200px]"> */}
         {/* <Navbar /> */}
         {/* <div className="h-[500px] w-full">
           <PieChart data={data} />
@@ -107,6 +108,11 @@ function Transactions() {
               xl: "100%",
             },
             padding: "16px",
+
+            // display: "flex",
+            // flexDirection: "column",
+            // justifyContent: "center",
+            // alignItems: "center",
           }}
         >
           <Link to="/add-transaction">

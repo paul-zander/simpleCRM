@@ -52,8 +52,8 @@ function Edit() {
   return (
     <div className="w-full flex">
       <Sidebar />
-      <div className="flex-6">
-        {/* <Navbar /> */}
+      <div className="flex-6 md:ml-[200px]">
+        <Navbar />
         <Toaster />
         {userId && (
           <EditUser data={data} editData={editData} setData={setData} />

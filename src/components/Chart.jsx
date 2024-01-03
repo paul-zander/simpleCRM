@@ -20,7 +20,6 @@ function Chart({ aspect, title, generatedOrders, data }) {
       (order) => order.product === data.product
     );
   }
-  console.log("data", data);
 
   // Month names array for output
   const monthNames = [
@@ -42,7 +41,6 @@ function Chart({ aspect, title, generatedOrders, data }) {
   const today = new Date();
 
   const currentMonthIndex = today.getMonth();
-  console.log(currentMonthIndex);
   const oneMonthAgoIndex = (currentMonthIndex - 1 + 12) % 12;
   const twoMonthsAgoIndex = (currentMonthIndex - 2 + 12) % 12;
   const threeMonthsAgoIndex = (currentMonthIndex - 3 + 12) % 12;

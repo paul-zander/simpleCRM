@@ -1,14 +1,15 @@
 // import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import CheckIcon from "@mui/icons-material/Check";
 // import { generatedOrders } from "../data/transactions";
 
 function Featured({ generatedOrders }) {
-  const [targetRevenue, setTargetRevenue] = useState(30000);
+  const [targetRevenue, setTargetRevenue] = useState(50000);
+  const inputValueRef = useRef("");
 
   const now = new Date();
   const previousMonth = new Date();
@@ -40,6 +41,9 @@ function Featured({ generatedOrders }) {
 
   function handleTargetInput(e) {
     e.preventDefault();
+    let value = inputValueRef.current.value;
+    value === "" ? setTargetRevenue(30000) : setTargetRevenue(value);
+    inputValueRef.current.value = "";
   }
 
   return (
@@ -67,24 +71,32 @@ function Featured({ generatedOrders }) {
         <p className="text-center text-sm text-gray-400">
           Previous transactions processing. Last payments may not be included.
         </p>
-        <div className="w-full flex items-center justify-around">
+        <div className="w-full flex flex-col sm:flex-row gap-6 items-center justify-around">
           <div className="flex flex-col justify-center items-center">
             <div className="text-sm">
-              <div className="flex justify-between items-center gap-2 border-2 p-1 w-40">
-                <input
-                  type="number"
-                  min="1"
-                  placeholder="Enter Target..."
-                  className="p-1 w-full focus:outline-none focus:border-sky-200"
-                  value=""
-                  onChange={(e) => setTargetRevenue(e.target.value)}
-                />
-                <CheckIcon fontSize={"small"} />
-              </div>
+              <form onSubmit={handleTargetInput}>
+                <div className="flex justify-between items-center gap-2 border-2 p-1 w-48">
+                  <input
+                    type="number"
+                    min="1"
+                    placeholder="Enter Target..."
+                    className="p-1 w-full focus:outline-none focus:border-sky-200"
+                    ref={inputValueRef}
+                  />
+                  <button
+                    className="bg-gray-100 hover:bg-sky-200 w-8 h-6 cursor-pointer rounded-md flex justify-center items-center"
+                    // onClick={handleTargetInput}
+                  >
+                    <CheckIcon fontSize={"small"} />
+                  </button>
+                </div>
+              </form>
             </div>
             {/* negative ? color red : green */}
             <div className="flex items-center mt-[10px] text-sm ">
-              <div className="resultAmount">{targetRevenue} €</div>
+              <div className="resultAmount">
+                Target: &nbsp;&nbsp; {targetRevenue} €
+              </div>
             </div>
           </div>
           <div className="text-center">

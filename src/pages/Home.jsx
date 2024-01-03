@@ -1,6 +1,6 @@
 import Chart from "../components/Chart";
 import Featured from "../components/Featured";
-// import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import Widget from "../components/Widget";
 import { getDocs, collection } from "firebase/firestore";
@@ -122,11 +122,16 @@ function Home() {
     0
   );
 
+  useEffect(() => {
+    const currentUser = localStorage.getItem("currentUser");
+    console.log(currentUser);
+  }, []);
+
   return (
     <div className="flex flex-col md:flex-row">
       <Sidebar />
       <div className="flex-6 md:ml-[200px]">
-        {/* <Navbar /> */}
+        <Navbar />
         <div className="xs:flex-col md:flex-row flex p-[20px] gap-[20px]">
           <Widget type="user" />
           {/* <Widget type="products" /> */}

@@ -1,6 +1,10 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext.jsx";
 import Logo from "../assets/img/logo.svg";
@@ -19,7 +23,7 @@ function Login() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [displayName, setDisplayName] = useState("");
+  const [name, setName] = useState("");
 
   const navigate = useNavigate();
 
@@ -37,34 +41,58 @@ function Login() {
     e.preventDefault();
     if (checkConfirmationPassword() === false) return;
 
+    // const auth = getAuth();
+    // createUserWithEmailAndPassword(auth, email, password)
+    //   .then((userCredential) => {
+    //     // Signed up
+    //     const user = userCredential.user;
+    //     user.displayName = name;
+    //     toast.success("Successfully registered!");
+    //     setAlreadyInUseError(false);
+    //     setEmailError(false);
+    //     setPasswordError(false);
+    //     // ...
+    //     setTimeout(() => {
+    //       navigate("/login");
+    //     }, 2000);
+    //   })
+
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed up
-        const user = userCredential.user;
-        user.displayName = displayName;
-        toast.success("Successfully registered!");
-        setAlreadyInUseError(false);
-        setEmailError(false);
-        setPasswordError(false);
-        // ...
-        setTimeout(() => {
-          navigate("/login");
-        }, 2000);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-        errorCode === "auth/weak-password" &&
-          setPasswordError("Weak password. Please use at least 6 characters.");
-        errorCode === "auth/invalid-email" && setEmailError("Invalid email.");
-        errorCode === "auth/email-already-in-use" &&
-          setAlreadyInUseError("Email already in use.");
-
-        // ..
+      // Update user profile with displayName
+      await updateProfile(userCredential.user, {
+        displayName: name,
       });
+
+      // Signed up successfully
+      toast.success("Successfully registered!");
+      setAlreadyInUseError(false);
+      setEmailError(false);
+      setPasswordError(false);
+
+      // ...
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode);
+
+      errorCode === "auth/weak-password" &&
+        setPasswordError("Weak password. Please use at least 6 characters.");
+      errorCode === "auth/invalid-email" && setEmailError("Invalid email.");
+      errorCode === "auth/email-already-in-use" &&
+        setAlreadyInUseError("Email already in use.");
+
+      // ..
+    }
 
     // TODO: danach zu login weiterleiten
   }
@@ -85,7 +113,7 @@ function Login() {
       <img src={Logo} alt="logo" className="h-[90px] absolute left-5 top-5" />
       <div className="h-screen flex flex-col items-center justify-center">
         <form
-          className="flex flex-col gap-6 p-12 shadow-3xl items-center w-[500px] relative bg-white"
+          className="flex flex-col gap-6 p-12 shadow-3xl items-center w-[300px] sm:w-[500px] relative bg-white"
           onSubmit={handleSignup}
         >
           <Link to="/login" title="Back to login page">
@@ -100,7 +128,7 @@ function Login() {
             } w-full border  p-3 focus:outline-none focus:border-[#38B6FF]`}
             type="name"
             placeholder="Full name"
-            onChange={(e) => setDisplayName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
           <input
             className={`${

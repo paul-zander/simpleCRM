@@ -1,10 +1,10 @@
 export const userInputs = [
-  {
-    id: "username",
-    label: "Username",
-    type: "text",
-    placeholder: "max_mustermann",
-  },
+  // {
+  //   id: "username",
+  //   label: "Username",
+  //   type: "text",
+  //   placeholder: "max_mustermann",
+  // },
   {
     id: "name",
     label: "Name and surname",

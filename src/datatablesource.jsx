@@ -41,7 +41,7 @@ export const userColumns = [
       );
     },
   },
-  { field: "username", headerName: "Username", width: 150 },
+  // { field: "username", headerName: "Username", width: 150 },
   {
     field: "email",
     headerName: "Email",

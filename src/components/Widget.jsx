@@ -41,8 +41,6 @@ function Widget({
     getAllData();
   }, []);
 
-  // console.log(users[0].timeStamp.toDate());
-
   function getAllUserDates() {
     const userCreationDates = users
       .filter((user) => user.timeStamp) // Filter out users without timeStamp
@@ -61,8 +59,6 @@ function Widget({
     getUserCreationForSpecificMonth(currentMonth);
   const userCreationsPreviousMonth =
     getUserCreationForSpecificMonth(previousMonth);
-
-  console.log(userCreationsCurrentMonth, userCreationsPreviousMonth);
 
   let userPercentage = (
     ((userCreationsCurrentMonth.length - userCreationsPreviousMonth.length) /
@@ -160,7 +156,10 @@ function Widget({
           {data?.amount} {data.isMoney && "€"}
         </span>
         {data.linkPath && (
-          <Link to={data.linkPath}>
+          <Link
+            to={data.linkPath}
+            className="hover:text-sky-500 transition-all"
+          >
             <span className="text-sm border-b">{data.link}</span>
           </Link>
         )}

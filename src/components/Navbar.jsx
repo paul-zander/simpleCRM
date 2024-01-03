@@ -5,11 +5,22 @@ import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlin
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
+import { useEffect } from "react";
 
 function Navbar() {
+  function getInitials(name) {
+    const words = name.split(" ");
+
+    const initials = words.map((word) => word.charAt(0));
+
+    return initials.join("");
+  }
+  const item = localStorage.getItem("currentUser");
+  const currentUser = item ? JSON.parse(item) : null;
+
   return (
     <div
-      className="h-[50px] flex items-center text-sm border-b
+      className="h-[70px] flex items-center text-sm shadow-3xl bg-gray-50
     "
     >
       <div className="w-full p-[20px] flex items-center justify-end">
@@ -21,7 +32,19 @@ function Navbar() {
           />
           <SearchOutlinedIcon />
         </div> */}
-        <div className="flex items-center">
+        <div className="flex gap-3">
+          <div className="flex items-center gap-3">
+            <div className="h-[42px] w-[42px] rounded-full flex items-center justify-center bg-sky-300">
+              <div className="z-10 h-[40px] w-[40px] rounded-full bg-sky-300 border-white border-2 text-white flex items-center justify-center">
+                {getInitials(currentUser.displayName)}
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <span className="font-medium">{currentUser.displayName}</span>
+              <span className="text-xs text-gray-500">{currentUser.email}</span>
+            </div>
+          </div>
+
           {/* <div className="flex items-center mr-[20px] relative">
             <LanguageOutlinedIcon className="text-[20px]" />
             English

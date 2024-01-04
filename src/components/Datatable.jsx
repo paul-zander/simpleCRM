@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 // import { userRows, userColumns } from "../datatablesource.jsx";
 import { Link } from "react-router-dom";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
@@ -11,6 +11,7 @@ function Datatable({ columns, category }) {
   const [data, setData] = useState([]);
   const [deleteModalIsVisible, setDeleteModalIsVisible] = useState(false);
   const [deleteModalId, setDeleteModalId] = useState(null);
+  console.log(category);
 
   useEffect(() => {
     async function getData() {
@@ -38,6 +39,7 @@ function Datatable({ columns, category }) {
       field: "action",
       headerName: "Action",
       width: 200,
+      sortable: false,
       renderCell: (params) => {
         return (
           <div className="flex items-center gap-[15px]">
@@ -87,10 +89,12 @@ function Datatable({ columns, category }) {
           />
           <p className="text-2xl bg-[#fce4e3] rounded-full p-2">❗</p>
           <h3 className="text-center">
-            Are you sure you want to delete this user?
+            Are you sure you want to delete this{" "}
+            {category === "products" ? "product" : "user"}?
           </h3>
           <p className="text-center">
-            This will delete this user permanently. You cannot undo this action.
+            This will delete this {category === "products" ? "product" : "user"}{" "}
+            permanently. You cannot undo this action.
           </p>
           <div className="flex gap-4">
             <button
@@ -133,6 +137,12 @@ function Datatable({ columns, category }) {
           className="datagrid"
           rows={data}
           columns={columns.concat(actionColumn)}
+          slots={{ toolbar: GridToolbar }}
+          slotProps={{
+            toolbar: {
+              showQuickFilter: true,
+            },
+          }}
           pageSize={9}
           rowsPerPageOptions={[9]}
           // checkboxSelection

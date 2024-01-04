@@ -37,30 +37,32 @@ function NewTransaction() {
     getData();
   }, []);
 
-  const productData = [
-    { name: "IT Security Assessment", price: 5000, id: createProductID() },
-    {
-      name: "IT Consulting for Freelancers",
-      price: 1000,
-      id: createProductID(),
-    },
-    {
-      name: "Website Creation for Personal Brands",
-      price: 1500,
-      id: createProductID(),
-    },
-    {
-      name: "Custom Software Customization",
-      price: 1200,
-      id: createProductID(),
-    },
-    {
-      name: "Digital Presence Optimization",
-      price: 600,
-      id: createProductID(),
-    },
-    { name: "Graphic Design Services", price: 200, id: createProductID() },
-  ];
+  console.log(products);
+
+  // const productData = [
+  //   { name: "IT Security Assessment", price: 5000, id: createProductID() },
+  //   {
+  //     name: "IT Consulting for Freelancers",
+  //     price: 1000,
+  //     id: createProductID(),
+  //   },
+  //   {
+  //     name: "Website Creation for Personal Brands",
+  //     price: 1500,
+  //     id: createProductID(),
+  //   },
+  //   {
+  //     name: "Custom Software Customization",
+  //     price: 1200,
+  //     id: createProductID(),
+  //   },
+  //   {
+  //     name: "Digital Presence Optimization",
+  //     price: 600,
+  //     id: createProductID(),
+  //   },
+  //   { name: "Graphic Design Services", price: 200, id: createProductID() },
+  // ];
 
   function createProductID() {
     const randomNumber = Math.floor(Math.random() * 9000000) + 1000000;
@@ -183,7 +185,7 @@ function NewTransaction() {
               onChange={(event) =>
                 handleInputChange("product", event.target.value)
               }
-              selectItems={productData}
+              selectItems={products}
               label={"Product"}
               inputlabel={"Product"}
             />

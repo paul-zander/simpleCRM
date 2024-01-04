@@ -17,8 +17,8 @@ function SelectMenu({ value, onChange, selectItems, label, inputlabel }) {
           onChange={onChange}
         >
           {selectItems.map((item) => (
-            <MenuItem value={item.name} key={item.id}>
-              {item.name}
+            <MenuItem value={item.name || item.product} key={item.id}>
+              {item.name || item.product}
             </MenuItem>
           ))}
         </Select>

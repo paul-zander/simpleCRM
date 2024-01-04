@@ -31,8 +31,8 @@ function App() {
       {/* <Sidebar /> */}
       <Routes>
         <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
         <Route path="/">
-          <Route path="signup" element={<Signup />} />
           <Route
             index
             element={

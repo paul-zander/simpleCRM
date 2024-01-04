@@ -25,7 +25,7 @@ import PendingIcon from "@mui/icons-material/Pending";
 export const userColumns = [
   { field: "id", headerName: "ID", width: 100, sortable: false },
   {
-    field: "user",
+    field: "name",
     headerName: "User",
     width: 200,
     renderCell: (params) => {
@@ -42,6 +42,31 @@ export const userColumns = [
     },
   },
   // { field: "username", headerName: "Username", width: 150 },
+  // {
+  //   field: "user",
+  //   headerName: "Img",
+  //   filterable: false,
+  //   width: 70,
+  //   sortable: false, // Hier setzen Sie sortable auf false, da es benutzerdefiniertes Rendern gibt
+  //   editable: false,
+  //   renderCell: (params) => {
+  //     return (
+  //       <div className="flex items-center">
+  //         <img
+  //           className="w-8 h-8 rounded-full object-cover mr-[20px]"
+  //           src={params.row.img}
+  //           alt="avatar"
+  //         />
+  //       </div>
+  //     );
+  //   },
+  // },
+  // {
+  //   field: "name", // Hier fügen Sie eine separate Eigenschaft für das Sortieren hinzu
+  //   headerName: "Name",
+  //   width: 200,
+  //   sortable: true, // Setzen Sie sortable auf true, da es nur Text enthält
+  // },
   {
     field: "email",
     headerName: "Email",

@@ -8,7 +8,7 @@ import CheckIcon from "@mui/icons-material/Check";
 // import { generatedOrders } from "../data/transactions";
 
 function Featured({ generatedOrders }) {
-  const [targetRevenue, setTargetRevenue] = useState(50000);
+  const [targetRevenue, setTargetRevenue] = useState(30000);
   const inputValueRef = useRef("");
 
   const now = new Date();
@@ -54,8 +54,8 @@ function Featured({ generatedOrders }) {
         </h2>
         {/* <MoreVertOutlinedIcon /> */}
       </div>
-      <div className="p-[20px] flex flex-col items-center justify-center gap-7">
-        <div style={{ width: 100, height: 100 }}>
+      <div className="p-[24px] flex flex-col items-center justify-center gap-7">
+        <div style={{ width: 110, height: 100 }}>
           {/* <ProgressProvider /> */}
           <CircularProgressbar
             value={percentage.toFixed(0)}

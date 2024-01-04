@@ -2,7 +2,7 @@ import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 // import BasicTable from "../components/BasicTable";
 // import { generatedOrders } from "../data/transactions";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 
 import { transactionsColumns } from "../datatablesource";
@@ -131,6 +131,12 @@ function Transactions() {
                 paginationModel: {
                   pageSize: 10,
                 },
+              },
+            }}
+            slots={{ toolbar: GridToolbar }}
+            slotProps={{
+              toolbar: {
+                showQuickFilter: true,
               },
             }}
             pageSizeOptions={[5, 10]}

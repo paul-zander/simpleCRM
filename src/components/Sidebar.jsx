@@ -17,12 +17,6 @@ import { useEffect, useState } from "react";
 function Sidebar() {
   const [sidebarIsVisible, setSidebarIsVisible] = useState(false);
 
-  useEffect(() => {
-    const item = localStorage.getItem("currentUser");
-    const currentuser = JSON.parse(item);
-    console.log(currentuser);
-  }, []);
-
   const auth = getAuth();
   function logOut() {
     signOut(auth)

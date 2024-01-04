@@ -47,8 +47,6 @@ function Edit() {
     toast.success("Changes successfully uploaded");
   }
 
-  console.log(data);
-
   return (
     <div className="w-full flex">
       <Sidebar />

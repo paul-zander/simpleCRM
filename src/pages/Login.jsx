@@ -57,7 +57,7 @@ function Login() {
   function handleGuestLogin(e) {
     e.preventDefault();
     dispatch({ type: "GUESTLOGIN", payload: "Guest" });
-
+    localStorage.setItem("currentUser", "Guest");
     navigate("/");
   }
 

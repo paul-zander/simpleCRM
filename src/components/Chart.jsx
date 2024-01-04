@@ -11,7 +11,7 @@ import {
 
 function Chart({ aspect, title, generatedOrders, data }) {
   // check if data comes from user or product
-  if (data && data.username) {
+  if (data && data.name) {
     generatedOrders = generatedOrders.filter(
       (order) => order.customerID === data.id
     );

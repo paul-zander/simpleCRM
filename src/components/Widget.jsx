@@ -13,6 +13,7 @@ import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { linkWithRedirect } from "firebase/auth";
 
 function Widget({
   type,
@@ -180,7 +181,13 @@ function Widget({
           )}
           {data?.percentage} %
         </div>
-        {data.icon}
+        {data.linkPath ? (
+          <Link to={data.linkPath} className="self-end">
+            {data.icon}
+          </Link>
+        ) : (
+          <div className="self-end">{data.icon}</div>
+        )}
       </div>
     </div>
   );

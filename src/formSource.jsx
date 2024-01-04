@@ -35,12 +35,12 @@ export const userInputs = [
     type: "text",
     placeholder: "Max-Mustermann-Straße, 10115 Berlin",
   },
-  {
-    id: "country",
-    label: "Country",
-    type: "text",
-    placeholder: "Germany",
-  },
+  // {
+  //   id: "country",
+  //   label: "Country",
+  //   type: "text",
+  //   placeholder: "Germany",
+  // },
 ];
 
 export const productInputs = [

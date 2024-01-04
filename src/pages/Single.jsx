@@ -58,6 +58,8 @@ function SinglePage() {
     loadData();
   }, []);
 
+  console.log(generatedOrders);
+
   return (
     <div className="flex w-full flex-col md:flex-row">
       <Sidebar />

@@ -15,6 +15,9 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import toast from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
 import { ErrorTwoTone } from "@mui/icons-material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Link } from "react-router-dom";
+import { countries } from "../data/countries.js";
 
 function New({ inputs, title }) {
   const [file, setFile] = useState("");
@@ -106,6 +109,7 @@ function New({ inputs, title }) {
   // }
 
   function handleInput(e) {
+    console.log(e.target);
     setData({ ...data, [e.target.id]: e.target.value });
   }
 
@@ -193,6 +197,12 @@ function New({ inputs, title }) {
         </div>
         {/* bottom */}
         <div className="shadow-3xl p-6 m-[20px] flex flex-col">
+          <Link
+            to={title === "Add New User" ? "/users" : "/products"}
+            className="w-10 h-10 flex justify-center items-center rounded-full bg-gray-100 hover:bg-gray-200 transition-all"
+          >
+            <ArrowBackIcon />
+          </Link>
           {/* left */}
           <div className="flex justify-center flex-1 items-center">
             <img
@@ -258,6 +268,24 @@ function New({ inputs, title }) {
                   )}
                 </div>
               ))}
+              {title === "Add New User" && (
+                <div className="w-2/5">
+                  <label htmlFor="country">Country</label>
+                  <select
+                    name="countries"
+                    id="country"
+                    className="w-full p-[5px] border-2 mt-2 outline-none resize-none"
+                    onChange={handleInput}
+                  >
+                    <option value="">Please choose a country</option>
+                    {countries.map((country) => (
+                      <option value={country} key={country}>
+                        {country}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
               <button
                 className={`${
                   uploadProgress !== null && uploadProgress < 100

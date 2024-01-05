@@ -2,18 +2,12 @@ import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutl
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-// import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined";
-
-// import { revenuePercentage } from "../data/transactions";
-// import { transactionsPercentage } from "../data/transactions";
-// import { totalCurrentMonth } from "../data/transactions";
-
+import Tooltip from "@mui/material/Tooltip";
 import { db } from "../firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { linkWithRedirect } from "firebase/auth";
 
 function Widget({
   type,
@@ -22,23 +16,14 @@ function Widget({
   revenuePercentage,
 }) {
   const [users, setUsers] = useState([]);
-  // const [products, setProducts] = useState([]);
 
   useEffect(() => {
     async function getAllData() {
       // Fetch user data
       const userSnapshot = await getDocs(collection(db, "users"));
       const userData = userSnapshot.docs.map((doc) => doc.data());
-
-      // Fetch product data
-      // const productSnapshot = await getDocs(collection(db, "products"));
-      // const productData = productSnapshot.docs.map((doc) => doc.data());
-
-      // Combine user and product data
       setUsers(userData);
-      // setProducts(productData);
     }
-
     getAllData();
   }, []);
 
@@ -109,22 +94,6 @@ function Widget({
         ),
       };
       break;
-    // case "products":
-    //   data = {
-    //     title: "PRODUCTS",
-    //     amount: products.length,
-    //     isMoney: false,
-    //     link: "View all products",
-    //     linkPath: "/products",
-    //     toolTipText: "Compared to last month",
-    //     icon: (
-    //       <Inventory2OutlinedIcon
-    //         className="p-[5px] rounded-sm self-end"
-    //         style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
-    //       />
-    //     ),
-    //   };
-    //   break;
     case "revenue":
       data = {
         title: "REVENUE (CURRENT MONTH)",
@@ -149,11 +118,13 @@ function Widget({
   }
 
   return (
-    <div className="flex flex-1 justify-between p-4 shadow-3xl rounded-md h-[120px]">
+    <div className="flex flex-1 justify-between p-4 shadow-3xl rounded-2xl h-[120px]">
       {/* left side */}
       <div className="flex flex-col justify-between">
-        <span className="font-bold text-sm text-gray-600">{data.title}</span>
-        <span className="text-3xl font-light">
+        <span className="font-bold text-sm text-gray-600 select-none">
+          {data.title}
+        </span>
+        <span className="text-3xl font-light select-none">
           {data?.amount} {data.isMoney && "€"}
         </span>
         {data.linkPath && (
@@ -167,20 +138,20 @@ function Widget({
       </div>
       {/* right side */}
       <div className="flex flex-col justify-between gap-5">
-        {/* NEED TO ADD: positive ? font color green : font color red */}
-        <div
-          className={`flex items-center text-sm ${
-            data.percentage > 0 ? "text-green-500" : "text-red-500"
-          }`}
-          title={data.toolTipText}
-        >
-          {data.percentage < 0 ? (
-            <KeyboardArrowDownIcon />
-          ) : (
-            <KeyboardArrowUpOutlinedIcon />
-          )}
-          {data?.percentage} %
-        </div>
+        <Tooltip title={data.toolTipText}>
+          <div
+            className={`flex items-center text-sm select-none ${
+              data.percentage > 0 ? "text-green-500" : "text-red-500"
+            }`}
+          >
+            {data.percentage < 0 ? (
+              <KeyboardArrowDownIcon />
+            ) : (
+              <KeyboardArrowUpOutlinedIcon />
+            )}
+            {data?.percentage} %
+          </div>
+        </Tooltip>
         {data.linkPath ? (
           <Link to={data.linkPath} className="self-end">
             {data.icon}

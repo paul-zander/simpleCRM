@@ -7,12 +7,6 @@ import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebase.jsx";
 import { useState, useEffect } from "react";
 import { formatDate } from "../utils/formatDate.js";
-// import {
-//   currentMonth,
-//   previousMonth,
-//   calcNumTransactionsPercentage,
-//   // filterTransactionsByMonth,
-// } from "../data/transactions.js";
 
 function Home() {
   const [generatedOrders, setGeneratedOrders] = useState([]);
@@ -37,12 +31,8 @@ function Home() {
     loadData();
   }, []);
 
-  // transactions calc
-
-  // Aktuelles Datum erstellen
   const currentDate = new Date();
 
-  // Monate als Array definieren
   const months = [
     "January",
     "February",
@@ -58,10 +48,8 @@ function Home() {
     "December",
   ];
 
-  // Aktuellen Monat auslesen
   const currentMonth = months[currentDate.getMonth()];
 
-  // Vorherigen Monat berechnen
   const previousMonthIndex = (currentDate.getMonth() - 1 + 12) % 12; // Um sicherzustellen, dass der Index nicht negativ wird
   const previousMonth = months[previousMonthIndex];
 
@@ -134,7 +122,6 @@ function Home() {
         <Navbar />
         <div className="xs:flex-col md:flex-row flex p-[20px] gap-[20px]">
           <Widget type="user" />
-          {/* <Widget type="products" /> */}
           <Widget
             type="transactions"
             transactionsPercentage={transactionsPercentage}
@@ -145,7 +132,7 @@ function Home() {
             totalCurrentMonth={totalCurrentMonth}
           />
         </div>
-        <div className="xs:flex-col lg:flex-row flex px-[20px] py-[5px] gap-[20px]">
+        <div className="xs:flex-col lg:flex-row flex px-[20px] gap-[20px]">
           <Featured generatedOrders={generatedOrders} />
           <Chart
             aspect={2 / 1}

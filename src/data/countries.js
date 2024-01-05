@@ -241,10 +241,3 @@ export const countries = [
   "Zambia",
   "Zimbabwe",
 ];
-
-const newContryList = countries.map((country) => ({
-  name: country,
-  id: country,
-}));
-
-console.log(newContryList);

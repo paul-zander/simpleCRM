@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar.jsx";
-import Navbar from "../components/Navbar.jsx";
 import UploadIcon from "@mui/icons-material/Upload";
 import {
   collection,
@@ -9,12 +8,10 @@ import {
   doc,
   serverTimestamp,
 } from "firebase/firestore";
-import { db, auth, storage } from "../firebase.jsx";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { db, storage } from "../firebase.jsx";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import toast from "react-hot-toast";
 import { Toaster } from "react-hot-toast";
-import { ErrorTwoTone } from "@mui/icons-material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Link } from "react-router-dom";
 import { countries } from "../data/countries.js";
@@ -22,11 +19,7 @@ import { countries } from "../data/countries.js";
 function New({ inputs, title }) {
   const [file, setFile] = useState("");
   const [data, setData] = useState({});
-  const [imageSelected, setImageSelected] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(null);
-  // let isUploading = false;
-
-  console.log(data);
 
   useEffect(() => {
     function uploadFile() {
@@ -38,7 +31,6 @@ function New({ inputs, title }) {
         (snapshot) => {
           // Observe state change events such as progress, pause, and resume
           // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log("Upload is " + progress + "% done");
@@ -70,79 +62,16 @@ function New({ inputs, title }) {
     file && uploadFile();
   }, [file]);
 
-  // async function uploadFile() {
-  //   const uniqueName = new Date().getTime() + file.name;
-  //   const storageRef = ref(storage, uniqueName);
-  //   const uploadTask = uploadBytesResumable(storageRef, file);
-  //   uploadTask.on(
-  //     "state_changed",
-  //     (snapshot) => {
-  //       // Observe state change events such as progress, pause, and resume
-  //       // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-
-  //       const progress =
-  //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-  //       console.log("Upload is " + progress + "% done");
-  //       setUploadProgress(progress.toFixed(0));
-
-  //       switch (snapshot.state) {
-  //         case "paused":
-  //           console.log("Upload is paused");
-  //           break;
-  //         case "running":
-  //           console.log("Upload is running");
-  //           break;
-  //       }
-  //     },
-  //     (error) => {
-  //       console.log(error);
-  //     },
-  //     () => {
-  //       // Handle successful uploads on complete
-  //       // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-  //       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-  //         console.log("File available at", downloadURL);
-  //         setData((prev) => ({ ...prev, img: downloadURL }));
-  //       });
-  //     }
-  //   );
-  // }
-
   function handleInput(e) {
     console.log(e.target);
     setData({ ...data, [e.target.id]: e.target.value });
   }
 
-  console.log("render happended");
-
-  // function checkIfImageUploaded() {
-  //   if (file === "") {
-  //     toast.error("Please upload an image.");
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
   async function addData(e) {
     e.preventDefault();
-    // if (checkIfImageUploaded()) {
-    //   return;
-    // }
 
-    console.log(title);
     if (title === "Add New User") {
       try {
-        // const res = await createUserWithEmailAndPassword(
-        //   auth,
-        //   data.email,
-        //   data.password
-        // );
-
-        // await setDoc(doc(db, "users", res.user.uid), {
-        //   ...data,
-        //   timeStamp: serverTimestamp(),
-        //   id: res.user.uid,
-        // });
         const ref = doc(collection(db, "users"));
 
         await setDoc(ref, {
@@ -297,9 +226,6 @@ function New({ inputs, title }) {
               >
                 Send
               </button>
-              {/* {isUploading === true && (
-                <span>Image Upload Progress: {uploadProgress} %</span>
-              )} */}
             </form>
           </div>
         </div>

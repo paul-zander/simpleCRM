@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid, GridToolbarQuickFilter } from "@mui/x-data-grid";
 // import { userRows, userColumns } from "../datatablesource.jsx";
 import { Link } from "react-router-dom";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
@@ -11,7 +11,6 @@ function Datatable({ columns, category }) {
   const [data, setData] = useState([]);
   const [deleteModalIsVisible, setDeleteModalIsVisible] = useState(false);
   const [deleteModalId, setDeleteModalId] = useState(null);
-  console.log(category);
 
   useEffect(() => {
     async function getData() {
@@ -48,19 +47,19 @@ function Datatable({ columns, category }) {
               to={`/${category}/${params.id}`}
               style={{ textDecoration: "none" }}
             >
-              <div className="py-[2px] px-[5px] rounded-sm text-blue-900 border border-dotted hover:border-solid border-blue-900 cursor-pointer">
+              <div className="py-[2px] px-[5px] rounded-sm text-white bg-sky-400 hover:bg-sky-300 cursor-pointer">
                 View
               </div>
             </Link>
             {/* edit btn */}
             <Link to={`/${category}/edit/${params.id}`}>
-              <div className="py-[2px] px-[5px] rounded-sm text-green-900 border border-dotted hover:border-solid border-green-900 cursor-pointer">
+              <div className="py-[2px] px-[5px] rounded-sm text-white bg-green-400 hover:bg-green-300 cursor-pointer">
                 Edit
               </div>
             </Link>
             {/* delete btn */}
             <div
-              className="py-[2px] px-[5px] rounded-sm text-red-900 border border-dotted hover:border-solid border-red-900 cursor-pointer"
+              className="py-[2px] px-[5px] rounded-sm text-white bg-red-400 hover:bg-red-300 cursor-pointer"
               // onClick={() => handleDelete(params.row.id)}
               onClick={() => toggleDeleteModal(params.row.id)}
             >
@@ -71,6 +70,20 @@ function Datatable({ columns, category }) {
       },
     },
   ];
+
+  function QuickSearchToolbar() {
+    return (
+      <Box
+        sx={{
+          p: 0.5,
+          pb: 0,
+        }}
+      >
+        <GridToolbarQuickFilter />
+      </Box>
+    );
+  }
+
   return (
     <div className="h-full p-[20px] flex flex-col items-center justify-center relative">
       {/* Overlay */}
@@ -115,7 +128,7 @@ function Datatable({ columns, category }) {
       <div className="text-sm text-gray-600 font-bold mb-6 flex items-center gap-5">
         <Link
           to={`/${category}/new`}
-          className="text-white text-base font-normal bg-green-600 hover:bg-green-500  p-[5px] rounded-md cursor-pointer"
+          className="text-white text-base font-normal bg-green-600 hover:bg-green-500  p-[7px] px-4 rounded-md cursor-pointer"
         >
           Add New {category === "users" ? "User" : "Product"}
         </Link>
@@ -130,14 +143,17 @@ function Datatable({ columns, category }) {
             lg: "900px",
             xl: "100%",
           },
-          // padding: "16px",
+          "& .datagrid": {
+            fontFamily: "Poppins",
+            fontSize: "13px",
+          },
         }}
       >
         <DataGrid
           className="datagrid"
           rows={data}
           columns={columns.concat(actionColumn)}
-          slots={{ toolbar: GridToolbar }}
+          slots={{ toolbar: QuickSearchToolbar }}
           slotProps={{
             toolbar: {
               showQuickFilter: true,
@@ -145,7 +161,6 @@ function Datatable({ columns, category }) {
           }}
           pageSize={9}
           rowsPerPageOptions={[9]}
-          // checkboxSelection
         />
       </Box>
     </div>

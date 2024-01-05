@@ -1,10 +1,4 @@
 export const userInputs = [
-  // {
-  //   id: "username",
-  //   label: "Username",
-  //   type: "text",
-  //   placeholder: "max_mustermann",
-  // },
   {
     id: "name",
     label: "Name and surname",
@@ -24,23 +18,12 @@ export const userInputs = [
     type: "text",
     placeholder: "0152 28817386",
   },
-  // {
-  //   id: "password",
-  //   label: "Password",
-  //   type: "password",
-  // },
   {
     id: "adress",
     label: "Address",
     type: "text",
     placeholder: "Max-Mustermann-Straße, 10115 Berlin",
   },
-  // {
-  //   id: "country",
-  //   label: "Country",
-  //   type: "text",
-  //   placeholder: "Germany",
-  // },
 ];
 
 export const productInputs = [

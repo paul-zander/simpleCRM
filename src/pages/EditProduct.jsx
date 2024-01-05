@@ -38,34 +38,6 @@ function EditProduct({ data, editData, setData }) {
             onChange={(e) => setData({ ...data, description: e.target.value })}
           />
         </div>
-        {/* <input
-          className="border-2 border-gray-200 w-[400px] p-1 outline-none"
-          type="text"
-          value={data?.phone || ""}
-          placeholder="Phone"
-          onChange={(e) => setData({ ...data, phone: e.target.value })}
-        />
-        <input
-          className="border-2 border-gray-200 w-[400px] p-1 outline-none"
-          type="text"
-          value={data?.email || ""}
-          placeholder="Email"
-          onChange={(e) => setData({ ...data, email: e.target.value })}
-        />
-        <input
-          className="border-2 border-gray-200 w-[400px] p-1 outline-none"
-          type="text"
-          value={data?.country || ""}
-          placeholder="Country"
-          onChange={(e) => setData({ ...data, country: e.target.value })}
-        />
-        <input
-          className="border-2 border-gray-200 w-[400px] p-1 outline-none"
-          type="text"
-          value={data?.age || ""}
-          placeholder="Age"
-          onChange={(e) => setData({ ...data, age: e.target.value })}
-        /> */}
         <button
           className="uppercase w-[200px] p-[10px] border-none bg-[#008080] hover:bg-[#63a5a5] text-white text-bold cursor-pointer mt-[10px]"
           type="submit"

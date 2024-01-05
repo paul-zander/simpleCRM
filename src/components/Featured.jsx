@@ -1,11 +1,10 @@
-// import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
 import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
 import KeyboardArrowUpOutlinedIcon from "@mui/icons-material/KeyboardArrowUpOutlined";
 import { useState, useRef } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import CheckIcon from "@mui/icons-material/Check";
-// import { generatedOrders } from "../data/transactions";
+import Tooltip from "@mui/material/Tooltip";
 
 function Featured({ generatedOrders }) {
   const [targetRevenue, setTargetRevenue] = useState(30000);
@@ -36,7 +35,6 @@ function Featured({ generatedOrders }) {
     0
   );
 
-  // const targetRevenue = 20000;
   const percentage = (totalCurrentMonth / targetRevenue) * 100;
 
   function handleTargetInput(e) {
@@ -47,23 +45,25 @@ function Featured({ generatedOrders }) {
   }
 
   return (
-    <div className="flex-2 flex flex-col justify-center items-center shadow-3xl p-4 relative">
+    <div className="flex-2 flex flex-col justify-center items-center shadow-3xl p-4 relative rounded-2xl select-none">
       <div className="flex items-center justify-between">
-        <h2 className="font-bold text-sm uppercase text-gray-600 absolute left-2 top-2">
+        <h2 className="font-bold text-sm uppercase text-gray-600 absolute left-4 top-4">
           Total Revenue
         </h2>
-        {/* <MoreVertOutlinedIcon /> */}
       </div>
       <div className="p-[24px] flex flex-col items-center justify-center gap-7">
-        <div style={{ width: 110, height: 100 }}>
-          {/* <ProgressProvider /> */}
-          <CircularProgressbar
-            value={percentage.toFixed(0)}
-            text={`${percentage.toFixed(0)}%`}
-            strokeWidth={7}
-          />
-          {/* <ProgressProvider /> */}
-        </div>
+        <Tooltip
+          title={`${totalCurrentMonth} / ${targetRevenue} €`}
+          placement="right-start"
+        >
+          <div style={{ width: 110, height: 100 }}>
+            <CircularProgressbar
+              value={percentage.toFixed(0)}
+              text={`${percentage.toFixed(0)}%`}
+              strokeWidth={7}
+            />
+          </div>
+        </Tooltip>
         <p className="font-semibold text-gray-600 text-center">
           Total sales made this month
         </p>
@@ -83,16 +83,12 @@ function Featured({ generatedOrders }) {
                     className="p-1 w-full focus:outline-none focus:border-sky-200"
                     ref={inputValueRef}
                   />
-                  <button
-                    className="bg-gray-100 hover:bg-sky-200 w-8 h-6 cursor-pointer rounded-md flex justify-center items-center"
-                    // onClick={handleTargetInput}
-                  >
+                  <button className="bg-gray-100 hover:bg-sky-200 w-8 h-6 cursor-pointer rounded-md flex justify-center items-center">
                     <CheckIcon fontSize={"small"} />
                   </button>
                 </div>
               </form>
             </div>
-            {/* negative ? color red : green */}
             <div className="flex items-center mt-[10px] text-sm ">
               <div className="resultAmount">
                 Target: &nbsp;&nbsp; {targetRevenue} €

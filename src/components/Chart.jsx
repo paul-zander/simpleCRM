@@ -1,4 +1,3 @@
-// import { generatedOrders } from "../data/transactions";
 import {
   AreaChart,
   Area,
@@ -97,7 +96,7 @@ function Chart({ aspect, title, generatedOrders, data }) {
   ];
 
   return (
-    <div className="flex-4 shadow-3xl p-4 ">
+    <div className="flex-4 shadow-3xl p-4 select-none rounded-2xl">
       <div className="font-bold text-sm uppercase text-gray-600 mb-4">
         {title}
       </div>

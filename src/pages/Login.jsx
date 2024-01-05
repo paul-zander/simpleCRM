@@ -1,7 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase.jsx";
-import { signInAnonymously } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext.jsx";
 import Logo from "../assets/img/logo.svg";
@@ -33,7 +32,7 @@ function Login() {
 
     // Clean up the timeout to avoid memory leaks
     return () => clearTimeout(animationTimeout);
-  }, []); // Run this effect only once on component mount
+  }, []);
 
   function handleLogin(e) {
     e.preventDefault();
@@ -67,7 +66,6 @@ function Login() {
 
   return (
     <div className="relative bg-white">
-      {/* <img src={Logo} alt="logo" className="h-[90px] absolute left-5 top-5" /> */}
       {/* Overlay */}
       {logoAnimation && <div className="fixed inset-0 bg-white z-10"></div>}
       <img
@@ -102,12 +100,6 @@ function Login() {
             placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
           />
-          {/* <input
-            className="w-full border border-gray-300 p-3 focus:outline-none focus:border-[#38B6FF]"
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.target.value)}
-          /> */}
           <div
             className={`${
               passwordError ? "border-red-600" : "border-gray-300"

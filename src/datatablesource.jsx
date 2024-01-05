@@ -1,27 +1,6 @@
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import PendingIcon from "@mui/icons-material/Pending";
 
-// function getStatusColorClasses(status) {
-//   let textColorClass = "";
-//   let bgColorClass = "";
-
-//   if (status === "pending") {
-//     textColorClass = "text-yellow-600";
-//     bgColorClass = "bg-yellow-100";
-//   } else if (status === "active") {
-//     textColorClass = "text-green-600";
-//     bgColorClass = "bg-green-100";
-//   } else if (status === "passive") {
-//     textColorClass = "text-red-600";
-//     bgColorClass = "bg-red-100";
-//   } else {
-//     textColorClass = "text-gray-600";
-//     bgColorClass = "bg-gray-100";
-//   }
-
-//   return `${textColorClass} ${bgColorClass}`;
-// }
-
 export const userColumns = [
   { field: "id", headerName: "ID", width: 100, sortable: false },
   {
@@ -41,32 +20,6 @@ export const userColumns = [
       );
     },
   },
-  // { field: "username", headerName: "Username", width: 150 },
-  // {
-  //   field: "user",
-  //   headerName: "Img",
-  //   filterable: false,
-  //   width: 70,
-  //   sortable: false, // Hier setzen Sie sortable auf false, da es benutzerdefiniertes Rendern gibt
-  //   editable: false,
-  //   renderCell: (params) => {
-  //     return (
-  //       <div className="flex items-center">
-  //         <img
-  //           className="w-8 h-8 rounded-full object-cover mr-[20px]"
-  //           src={params.row.img}
-  //           alt="avatar"
-  //         />
-  //       </div>
-  //     );
-  //   },
-  // },
-  // {
-  //   field: "name", // Hier fügen Sie eine separate Eigenschaft für das Sortieren hinzu
-  //   headerName: "Name",
-  //   width: 200,
-  //   sortable: true, // Setzen Sie sortable auf true, da es nur Text enthält
-  // },
   {
     field: "email",
     headerName: "Email",
@@ -174,7 +127,7 @@ export const transactionsColumns = [
     renderCell: (params) => {
       return (
         <div
-          className={`flex items-center justify-center p-1 ${
+          className={`flex items-center justify-center rounded-md p-1 ${
             params.row.status === "Approved"
               ? "bg-green-100 text-green-600"
               : "bg-yellow-100 text-yellow-600"

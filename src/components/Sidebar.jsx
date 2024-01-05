@@ -2,17 +2,13 @@ import SpaceDashboardOutlinedIcon from "@mui/icons-material/SpaceDashboardOutlin
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import CreditCardOutlinedIcon from "@mui/icons-material/CreditCardOutlined";
-import SignalCellularAltOutlinedIcon from "@mui/icons-material/SignalCellularAltOutlined";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import AccountBoxOutlinedIcon from "@mui/icons-material/AccountBoxOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import Logo from "../assets/img/logo.svg";
 import { Link } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function Sidebar() {
   const [sidebarIsVisible, setSidebarIsVisible] = useState(false);
@@ -57,7 +53,6 @@ function Sidebar() {
       >
         <div className="h-[50px] flex items-center justify-center">
           <Link to="/">
-            {/* <span className="text-lg font-bold text-[#1976D2]">SimpleCRM</span> */}
             <img src={Logo} alt="" className="h-[100px]" />
           </Link>
         </div>
@@ -68,7 +63,7 @@ function Sidebar() {
             </p>
             <Link to="/">
               <li
-                className={`flex items-center p-2 cursor-pointer hover:bg-sky-100`}
+                className={`flex items-center p-2 cursor-pointer hover:bg-sky-100 rounded-lg`}
               >
                 <SpaceDashboardOutlinedIcon fontSize="small" />
                 <span className="text-gray-700 ml-2">Dashboard</span>
@@ -79,7 +74,7 @@ function Sidebar() {
             </p>
             <Link to="/users">
               <li
-                className={`flex items-center p-2 cursor-pointer hover:bg-sky-100`}
+                className={`flex items-center p-2 cursor-pointer hover:bg-sky-100 rounded-lg`}
               >
                 <Person2OutlinedIcon fontSize="small" />
                 <span className="text-gray-700 ml-2">Users</span>
@@ -87,7 +82,7 @@ function Sidebar() {
             </Link>
             <Link to="/products">
               <li
-                className={`flex items-center p-2 cursor-pointer hover:bg-sky-100`}
+                className={`flex items-center p-2 cursor-pointer hover:bg-sky-100 rounded-lg`}
               >
                 <Inventory2OutlinedIcon fontSize="small" />
                 <span className="text-gray-700 ml-2">Products</span>
@@ -95,36 +90,12 @@ function Sidebar() {
             </Link>
             <Link to="/transactions">
               <li
-                className={`flex items-center p-2 cursor-pointer hover:bg-sky-100`}
+                className={`flex items-center p-2 cursor-pointer hover:bg-sky-100 rounded-lg`}
               >
                 <CreditCardOutlinedIcon fontSize="small" />
                 <span className="text-gray-700 ml-2">Transactions</span>
               </li>
             </Link>
-            {/* <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">
-            USEFUL
-          </p>
-          <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-            <SignalCellularAltOutlinedIcon fontSize="small" />
-            <span className="text-gray-700 ml-2">Stats</span>
-          </li>
-          <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-            <NotificationsNoneOutlinedIcon fontSize="small" />
-            <span className="text-gray-700 ml-2">Notifications</span>
-          </li>
-          <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">
-            SERVICE
-          </p>
-          <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-            <span className="text-gray-700 ml-2">System Health</span>
-          </li>
-          <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-            <span className="text-gray-700 ml-2">Logs</span>
-          </li>
-          <li className="flex items-center p-2 cursor-pointer hover:bg-purple-100">
-            <span className="text-gray-700 ml-2">Settings</span>
-          </li> */}
-
             <p className="text-gray-600 mt-5 mb-1 font-semibold text-sm">
               USER
             </p>
@@ -133,17 +104,13 @@ function Sidebar() {
               <span className="text-gray-700 ml-2">Profile</span>
             </li> */}
             <Link to="/login" onClick={logOut}>
-              <li className="flex items-center p-2 cursor-pointer hover:bg-sky-100">
+              <li className="flex items-center p-2 cursor-pointer hover:bg-sky-100 rounded-lg">
                 <LogoutOutlinedIcon fontSize="small" />
                 <span className="text-gray-700 ml-2">Logout</span>
               </li>
             </Link>
           </ul>
         </div>
-        {/* <div className="flex items-center p-2 cursor-pointer hover:bg-purple-100 mt-8">
-        <LightModeOutlinedIcon />
-        <span className="text-gray-700 ml-2">Theme</span>
-      </div> */}
       </div>
     </>
   );

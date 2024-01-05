@@ -40,23 +40,6 @@ function Login() {
   async function handleSignup(e) {
     e.preventDefault();
     if (checkConfirmationPassword() === false) return;
-
-    // const auth = getAuth();
-    // createUserWithEmailAndPassword(auth, email, password)
-    //   .then((userCredential) => {
-    //     // Signed up
-    //     const user = userCredential.user;
-    //     user.displayName = name;
-    //     toast.success("Successfully registered!");
-    //     setAlreadyInUseError(false);
-    //     setEmailError(false);
-    //     setPasswordError(false);
-    //     // ...
-    //     setTimeout(() => {
-    //       navigate("/login");
-    //     }, 2000);
-    //   })
-
     const auth = getAuth();
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -76,25 +59,19 @@ function Login() {
       setEmailError(false);
       setPasswordError(false);
 
-      // ...
       setTimeout(() => {
         navigate("/login");
       }, 2000);
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
-      console.log(errorCode);
 
       errorCode === "auth/weak-password" &&
         setPasswordError("Weak password. Please use at least 6 characters.");
       errorCode === "auth/invalid-email" && setEmailError("Invalid email.");
       errorCode === "auth/email-already-in-use" &&
         setAlreadyInUseError("Email already in use.");
-
-      // ..
     }
-
-    // TODO: danach zu login weiterleiten
   }
 
   function checkConfirmationPassword() {

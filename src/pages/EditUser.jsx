@@ -17,13 +17,6 @@ function EditUser({ data, editData, setData }) {
             onChange={(e) => setData({ ...data, name: e.target.value })}
           />
         </div>
-        {/* <input
-          className="border-2 border-gray-200 w-[400px] p-1 outline-none"
-          type="text"
-          value={data?.username || ""}
-          placeholder="Username"
-          onChange={(e) => setData({ ...data, username: e.target.value })}
-        /> */}
         <div>
           <h3 className="text-gray-400">Adress</h3>
           <input
